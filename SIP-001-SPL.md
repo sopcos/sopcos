@@ -26,7 +26,7 @@ Sopcos introduces **"Policy as Data"**:
 ### 1. Philosophy & Motto
 > "SPL does not instruct devices how to act. SPL defines whether an intent is permissible."
 
-* **Verdict, Not Command:** SPL returns `ALLOW` or `DENY`. It never returns low-level commands like `GPIO_HIGH`.
+* **Verdict, Not Command:** SPL returns `ALLOW`, `DENY`, or `WARN`. It never returns low-level commands like `GPIO_HIGH`.
 * **Fail-Closed:** In the absence of a matching policy, the default behavior MUST be `DENY`.
 
 ### 2. Identity & Authority
