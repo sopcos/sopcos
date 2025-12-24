@@ -44,8 +44,9 @@ A policy is only valid if it is signed by an authority recognized by the on-chai
   }
 }
 
-### 3. Normative Domains (Conflict Resolution)
-Implementations **MUST** apply domain precedence strictly as defined below. When two rules conflict, the higher domain wins.
+```
+### 3. Normative Domains (Definitions)
+Implementations **MUST** recognize the following domain hierarchy values.
 
 | Precedence | Domain | Value | Description |
 | :--- | :--- | :--- | :--- |
@@ -82,13 +83,32 @@ SPL uses a context-aware condition model to ensure determinism.
     }
   }
 ]
+```
 
-### 5. Canonical Serialization
-To ensure a unique and verifiable `policy_hash`, the JSON object MUST be serialized as follows:
-1.  **Ordering:** Object keys MUST be sorted lexicographically (A-Z).
-2.  **Whitespace:** No whitespace allowed outside of string values (Compact JSON).
-3.  **Encoding:** UTF-8. No Byte Order Mark (BOM).
-4.  **Floats:** Must be represented without exponents if possible, or standardized scientific notation.
+### 5. Conflict Resolution Logic
+If multiple policies match a target, the Gateway/Node MUST resolve the conflict using the following logic:
+
+1.  **Domain Check:** The policy with the higher Normative Domain (e.g., `0x03` SAFETY > `0x02` SECURITY) wins.
+2.  **Priority Check:** If domains are equal, the higher priority integer defined in the policy metadata wins.
+3.  **Deterministic Tie-Breaker:** If both domain and priority are equal, compare the `policy_hash` bytes lexicographically. The higher value wins.
+
+### 6. System Defaults (Fail-Closed)
+To prevent "Silent Failures," deployments MUST specify default behaviors in the absence of matching policies.
+
+```json
+"defaults": {
+  "no_policy_match": "DENY", 
+  "audit_level": "FULL"
+}
+```
+
+### 7. Canonical Serialization
+To ensure a unique and verifiable `policy_hash`, the JSON object MUST be serialized as follows before hashing:
+
+* **Ordering:** Object keys MUST be sorted lexicographically (A-Z).
+* **Whitespace:** No whitespace allowed outside of string values (Compact JSON).
+* **Encoding:** UTF-8. No Byte Order Mark (BOM).
+* **Floats:** Must be represented without exponents if possible.
 
 ## Rationale
 The decision to avoid Turing-complete scripting (WASM/Lua) on the verification layer is intentional. This ensures that the computational cost of policy evaluation is bounded (O(N)) and predictable, which is crucial for high-throughput IoT Gateways and real-time auditing.
