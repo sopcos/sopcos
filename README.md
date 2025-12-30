@@ -13,6 +13,7 @@ It serves as the **"Single Source of Truth"** for the Sopcos Protocol, Governanc
 | **[SIP-004](./SIP-004.md)** | Threat Model & Accountability Framework | Informational | Approved |
 | **[SIP-005](./SIP-005.md)** | Policy Simulation & What-If Semantics | Standards Track | Approved |
 | **[SIP-006](./SIP-006.md)** | Emergency, Override & Post-Mortem Semantics | Standards Track | Approved |
+| **[SIP-007](./SIP-007.md)** | Regulatory Brief: Decision Accountability in Autonomous Industrial Systems | Informational | Approved |
 
 ## Terminology
 For a comprehensive definition of core terms (e.g., *Dirty State*, *Lying Gateway*, *Blast Radius*, *Compliance Debt*), please refer to the **[GLOSSARY](./GLOSSARY.md)**.
