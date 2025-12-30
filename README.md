@@ -15,6 +15,8 @@ It serves as the **"Single Source of Truth"** for the Sopcos Protocol, Governanc
 | **[SIP-006](./SIP-006.md)** | Emergency, Override & Post-Mortem Semantics | Standards Track | Approved |
 | **[SIP-007](./SIP-007.md)** | Regulatory Brief: Decision Accountability in Autonomous Industrial Systems | Informational | Approved |
 | **[SIP-008](./SIP-008.md)** | Authority Hierarchy & Jurisdiction Lattice | Standards Track | Approved |
+| **[SIP-009](./SIP-009.md)** | Cryptographic Policy Envelope (SOP Format) | Standards Track | Ratified |
+| **[SIP-Appendix-A](./SIP-Appendix-A.md)** | Canonical Incident Walkthrough: "The Legal Shield" | Appendix | Informational |
 
 ## Terminology
 For a comprehensive definition of core terms (e.g., *Dirty State*, *Lying Gateway*, *Blast Radius*, *Compliance Debt*), please refer to the **[GLOSSARY](./GLOSSARY.md)**.
