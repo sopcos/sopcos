@@ -77,13 +77,16 @@ type Verdict struct {
     // Forensic evidence of what the machine would have done.
     OriginalVerdicts []Verdict      `json:"original_verdicts,omitempty"`
 }
+```
 
+```json
 type OverrideRecord struct {
     OperatorDID string `json:"operator_did"`
     Reason      string `json:"reason"`
     TokenHash   string `json:"token_hash"`
     Timestamp   int64  `json:"timestamp"`
 }
+```
 
 ## 7. Chain Validation Logic (L1)
 To ensure data integrity on the immutable ledger, the L1 Chain (Axon/Smart Contract) MUST enforce the following validation rule:
