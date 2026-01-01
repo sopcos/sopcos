@@ -1,11 +1,15 @@
-| Metadata | Details |
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-007)
+
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 007 |
+| **SIP** | 007 |
 | **Title** | Regulatory Compliance & Legal Interface |
+| **Status** | RATIFIED |
+| **Type** | Informational / Standard |
 | **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
-| **Type** | Informational |
-| **Created** | 2025-12-25 |
+| **Date** | 2025-12-25 |
+| **Layer** | Governance / Legal |
+| **Related** | SIP-003, SIP-004 |
 | **License** | CC0-1.0 (Public Domain) |
 
 ---

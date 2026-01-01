@@ -1,15 +1,15 @@
----
-sip: 1
-title: Sopcos Policy Language (SPL)
-description: A declarative, deterministic governance primitive for cyber-physical systems.
-status: Draft
-type: Standards Track
-author: Maestro <maestro@sopcos.io>, Nexus <nexus@ai.sopcos.io>
-created: 2025-12-22
-discussions-to: https://github.com/sopcos/sopcos-specs/issues/1
----
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-001)
 
-# Sopcos Policy Language (SPL)
+| Metadata | Value |
+| :--- | :--- |
+| **SIP** | 001 |
+| **Title** | Sopcos Policy Language (SPL) |
+| **Status** | DRAFT |
+| **Type** | Standards Track (Core) |
+| **Author** | Maestro, Nexus |
+| **Created** | 2025-12-22 |
+| **Layer** | Authoring |
+| **Discussions** | [GitHub Issue #1](https://github.com/sopcos/sopcos-specs/issues/1) |
 
 ## Abstract
 Sopcos Policy Language (SPL) is a JSON-based, deterministic specification designed to validate intents within the Sopcos Ecosystem. Unlike traditional smart contracts, SPL is not a scripting language; it is a **configuration of law**. It defines whether an action is permissible without instructing the device on how to perform it.
@@ -115,7 +115,3 @@ The decision to avoid Turing-complete scripting (WASM/Lua) on the verification l
 
 ## Copyright
 Copyright and related rights waived via [MIT](https://opensource.org/licenses/MIT).
-<<<<<<< HEAD
-=======
-
->>>>>>> 6ddfacf1987e0b523dfb1b1fb6c1756a84d7c0fe

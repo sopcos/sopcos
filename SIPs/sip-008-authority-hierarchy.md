@@ -1,4 +1,4 @@
-# SIP-008: Authority Hierarchy & Jurisdiction Lattice
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-008)
 
 | Metadata | Value |
 | :--- | :--- |
@@ -9,6 +9,7 @@
 | **Author** | The Architect (HQ) |
 | **Date** | 2025-12-30 |
 | **Layer** | Synapse (Runtime) & Axon (Resolution) |
+| **Related** | SIP-006 (DID), SIP-010 (Verdict) |
 
 ## 1. Abstract
 This specification establishes a rigid **Normative Authority Graph** and a **Jurisdiction Lattice** to resolve conflicts between competing policies. It replaces arbitrary priority integers with a constitutionally defined hierarchy and introduces **Pre-Law Constraints** based on immutable physical reality.

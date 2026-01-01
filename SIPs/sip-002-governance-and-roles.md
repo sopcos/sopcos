@@ -1,13 +1,14 @@
-# SIP-002: Sopcos Governance, Roles & Licensing Strategy
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-002)
 
-| Metadata | Details |
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 002 |
+| **SIP** | 002 |
 | **Title** | Sopcos Governance, Roles & Licensing Strategy |
-| **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
+| **Status** | RATIFIED |
 | **Type** | Process / Governance |
+| **Author** | Maestro & Nexus (The Foundation) |
 | **Created** | 2025-12-24 |
+| **Layer** | Governance |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract

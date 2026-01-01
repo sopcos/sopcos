@@ -1,13 +1,14 @@
-# SIP-004: Threat Model & Accountability Framework
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-004)
 
-| Metadata | Details |
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 004 |
+| **SIP** | 004 |
 | **Title** | Threat Model & Accountability Framework |
-| **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
+| **Status** | RATIFIED |
 | **Type** | Informational / Standard |
-| **Created** | 2025-12-24 |
+| **Author** | Maestro & Nexus (The Foundation) |
+| **Date** | 2025-12-24 |
+| **Layer** | Governance / Security |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract

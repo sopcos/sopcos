@@ -1,13 +1,14 @@
-# SIP-003: Decision Semantics & Audit Guarantees
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-003)
 
-| Metadata | Details |
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 003 |
+| **SIP** | 003 |
 | **Title** | Decision Semantics & Canonical State |
-| **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
+| **Status** | RATIFIED |
 | **Type** | Standards Track (Core) |
+| **Author** | Maestro & Nexus (The Foundation) |
 | **Created** | 2025-12-24 |
+| **Layer** | Governance / Runtime |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract

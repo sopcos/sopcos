@@ -1,4 +1,4 @@
-# SIP-009: Cryptographic Policy Envelope (SOP Format)
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-009)
 
 | Metadata | Value |
 | :--- | :--- |
@@ -9,7 +9,7 @@
 | **Author** | The Architect (HQ) |
 | **Date** | 2025-12-30 |
 | **Layer** | Authoring, Axon, Synapse |
-| **Related** | SOPCOS PROTOCOL GOVERNANCE SPECIFICATION, SIP-006, SIP-008 |
+| **Related** | SIP-006, SIP-008 |
 
 ## 1. Abstract
 This specification defines the **Sopcos Object Package (.sop)**, a cryptographically signed policy artifact format used for the distribution, verification, and execution of Sopcos Policy Code (WASM).

@@ -7,15 +7,17 @@ It serves as the **"Single Source of Truth"** for the Sopcos Protocol, Governanc
 
 | SIP | Title | Type | Status |
 | :--- | :--- | :--- | :--- |
-| **[SIP-001](./SIP-001-SPL.md)** | Sopcos Policy Language (SPL) | Standards Track | Draft |
-| **[SIP-002](./SIP-002.md)** | Governance, Roles & Licensing Strategy | Process | Approved |
-| **[SIP-003](./SIP-003.md)** | Decision Semantics & Canonical State | Standards Track | Approved |
-| **[SIP-004](./SIP-004.md)** | Threat Model & Accountability Framework | Informational | Approved |
-| **[SIP-005](./SIP-005.md)** | Policy Simulation & What-If Semantics | Standards Track | Approved |
-| **[SIP-006](./SIP-006.md)** | Emergency, Override & Post-Mortem Semantics | Standards Track | Approved |
-| **[SIP-007](./SIP-007.md)** | Regulatory Brief: Decision Accountability in Autonomous Industrial Systems | Informational | Approved |
-| **[SIP-008](./SIP-008.md)** | Authority Hierarchy & Jurisdiction Lattice | Standards Track | Approved |
-| **[SIP-009](./SIP-009.md)** | Cryptographic Policy Envelope (SOP Format) | Standards Track | Ratified |
+| **[SIP-001](./SIPs/sip-001-policy-language.md)** | Sopcos Policy Language (SPL) | Standards Track | Draft |
+| **[SIP-002](./SIPs/sip-002-governance.md)** | Governance, Roles & Licensing Strategy | Process | Approved |
+| **[SIP-003](./SIPs/sip-003-decision-semantics.md)** | Decision Semantics & Canonical State | Standards Track | Approved |
+| **[SIP-004](./SIPs/sip-004-threat-model.md)** | Threat Model & Accountability Framework | Informational | Approved |
+| **[SIP-005](./SIPs/sip-005-simulation-semantics.md)** | Policy Simulation & What-If Semantics | Standards Track | Approved |
+| **[SIP-006](./SIPs/sip-006-emergency-semantics.md)** | Emergency, Override & Post-Mortem Semantics | Standards Track | Approved |
+| **[SIP-007](./SIPs/sip-007-regulatory-brief.md)** | Regulatory Brief: Decision Accountability in Autonomous Industrial Systems | Informational | Approved |
+| **[SIP-008](./SIPs/sip-008-authority-hierarchy.md)** | Authority Hierarchy & Jurisdiction Lattice | Standards Track | Approved |
+| **[SIP-009](./SIPs/sip-009-cryptographic-envelope.md)** | Cryptographic Policy Envelope (SOP Format) | Standards Track | Ratified |
+| **[SIP-010](./SIPs/sip-010-verdict-algebra.md)** | The Verdict Algebra (Decision Resolution Logic) | Standards Track | Ratified |
+| **[SIP-011](./SIPs/sip-011-forensic-liability.md)** | Forensic Liability & Operational Semantics | Standards Track | Ratified |
 | **[SIP-Appendix-A](./SIP-Appendix-A.md)** | Canonical Incident Walkthrough: "The Legal Shield" | Appendix | Informational |
 
 ## Terminology

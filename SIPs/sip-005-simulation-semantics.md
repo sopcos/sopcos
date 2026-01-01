@@ -1,13 +1,15 @@
-# SIP-005: Policy Simulation & What-If Semantics
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-005)
 
-| Metadata | Details |
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 005 |
+| **SIP** | 005 |
 | **Title** | Policy Simulation & What-If Semantics |
-| **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
+| **Status** | RATIFIED |
 | **Type** | Standards Track (Core) |
-| **Created** | 2025-12-24 |
+| **Author** | Maestro & Nexus (The Foundation) |
+| **Date** | 2025-12-24 |
+| **Layer** | Authoring / Runtime |
+| **Related** | SIP-008, SIP-010 |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract

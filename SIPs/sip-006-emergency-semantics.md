@@ -1,13 +1,15 @@
-# SIP-006: Emergency, Override & Post-Mortem Semantics
+# SOPCOS IMPROVEMENT PROPOSAL (SIP-006)
 
-| Metadata | Details |
+| Metadata | Value |
 | :--- | :--- |
-| **SIP Number** | 006 |
+| **SIP** | 006 |
 | **Title** | Emergency, Override & Post-Mortem Semantics |
-| **Author** | Maestro & Nexus (The Foundation) |
-| **Status** | **Approved** |
+| **Status** | RATIFIED |
 | **Type** | Standards Track (Core) |
-| **Created** | 2025-12-24 |
+| **Author** | Maestro & Nexus (The Foundation) |
+| **Date** | 2025-12-24 |
+| **Layer** | Governance / Runtime |
+| **Related** | SIP-004, SIP-008 |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract
