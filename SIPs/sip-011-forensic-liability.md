@@ -77,9 +77,7 @@ type Verdict struct {
     // Forensic evidence of what the machine would have done.
     OriginalVerdicts []Verdict      `json:"original_verdicts,omitempty"`
 }
-```
 
-```json
 type OverrideRecord struct {
     OperatorDID string `json:"operator_did"`
     Reason      string `json:"reason"`
