@@ -4,152 +4,112 @@
 | :--- | :--- |
 | **SIP** | 010 |
 | **Title** | The Verdict Algebra (Decision Resolution Logic) |
-| **Status** | RATIFIED |
+| **Status** | LIVING STANDARD (REVISED) |
 | **Type** | Standards Track (Core) |
 | **Layer** | Synapse (Runtime) |
-| **Motto** | *Decisions are vectors. Conflicts are structural, not exceptional.* |
-| **Related** | SIP-008, SIP-009 |
+| **Motto** | Decisions are vectors. Conflicts are structural, not exceptional. |
+| **Related** | SIP-008, SIP-009, SIP-003, SIP-011 |
 
 ## 1. Abstract
-This specification defines the deterministic mathematical rules for resolving multiple Policy Verdicts (`.sop`) into a single Final Verdict.
+This specification defines the deterministic mathematical rules for resolving multiple **Policy Verdicts** into a single **Final Verdict**. It defines how multiple, simultaneous verdicts—originating from different authorities, scopes, and times—are composed into a single enforceable outcome.
 
-It defines how multiple, simultaneous verdicts—originating from different authorities, scopes, and times—are composed into a single enforceable outcome.
+SIP-010 eliminates:
+* Arbitrary priority integers.
+* Implicit “last-write-wins” logic.
 
-**SIP-010 eliminates:**
-* Arbitrary priority integers
-* Temporal race conditions
-* Implicit “last-write-wins” logic
-
-**It replaces them with:**
-* A normative authority hierarchy (SIP-008)
-* A jurisdictional scope lattice
-* A mathematically deterministic resolution algorithm
-
-**The runtime does not decide. It calculates.**
+It replaces them with:
+* A normative authority hierarchy (SIP-008).
+* A jurisdictional scope lattice.
+* A mathematically deterministic resolution algorithm (O(N)).
 
 ## 2. Motivation
-In any non-trivial Sopcos deployment, a target scope may be subject to multiple simultaneous verdicts:
-* A **Local Safety Policy** denies operation (e.g., pressure too high).
-* A **Global Efficiency Policy** allows continuation (e.g., demand is high).
-* A **Regulatory Constraint** restricts operation hours.
-* An **Emergency Directive** orders an immediate shutdown.
-
-Without a formal resolution algebra, systems typically revert to fragile heuristics:
-* Timestamp ordering ("Last one wins").
-* Configuration load order.
-* Undocumented precedence rules.
-
-Such behavior is **legally indefensible** and **operationally unsafe**.
+In any non-trivial Sopcos deployment, a target scope may be subject to multiple simultaneous verdicts. Without a formal algebra, systems revert to fragile heuristics.
 
 SIP-010 establishes a foundational axiom:
-**Conflict is not an error state. Conflict is the primary state.**
-
-**A verdict is not a boolean. It is a directed force with jurisdiction.**
+> **"Conflict is not an error state. Conflict is the primary state."**
 
 ## 3. The Verdict Vector
-Mathematically, a Verdict $V$ is a 4-dimensional vector defined as:
+Mathematically, a Verdict `V` is a 4-dimensional vector defined as:
 
 $$V = \langle \delta, \alpha, \sigma, \tau \rangle$$
 
 Where:
-1.  **$\delta$ (Decision - Direction):** The vector direction (`HALT`, `DENY`, `ALLOW`).
-2.  **$\alpha$ (Authority - Magnitude):** The scalar weight derived from SIP-008.
+1.  **$\delta$ (Decision - Direction):** The scalar enumeration.
+    * `HALT = 3`
+    * `WARN = 2`
+    * `ALLOW = 1`
+    * `DENY = 0`
+2.  **$\alpha$ (Authority - Magnitude):** The scalar weight derived from SIP-008 (Lower Value = Higher Rank).
 3.  **$\sigma$ (Scope - Domain):** The spatial set where this force is applied.
-4.  **$\tau$ (Timestamp - Point):** The temporal coordinate (used for freshness, not priority).
+4.  **$\tau$ (Timestamp - Validity):** The temporal coordinate used for freshness checks.
 
 ## 4. Formal Model & Resolution Logic
-The resolution logic is defined over the Verdict Space using the following predicates, operators, and algorithms.
 
-### 4.1. Verdict Space ($\mathbb{V}$)
-Let $\mathbb{V}$ be the set of all possible well-formed verdict vectors.
-$$v \in \mathbb{V} \implies v = \langle \delta, \alpha, \sigma \rangle$$
-
-**Key Properties:**
-* **Comparability:** Verdicts are comparable only under defined operators.
-* **Ordering:** No total ordering exists within $\mathbb{V}$. It is a partially ordered set under $\succ$.
-* **Composition:** The operation is partial and conditional.
+### 4.1. Verdict Space (V)
+Let $V$ be the set of all possible well-formed verdict vectors.
+$$v \in V \implies v = \langle \delta, \alpha, \sigma, \tau \rangle$$
 
 ### 4.2. Applicability Predicate ($\vdash$)
 An operator defining if a verdict is juridically valid for a specific target scope $t$.
 $$v \vdash t \iff t \subseteq v.\sigma$$
 
-**Constraint:**
-Verdicts failing this predicate are **non-participating** and **MUST** be discarded before resolution.
-
 ### 4.3. Authority Dominance Relation ($\succ$)
-A strict partial order defining the hierarchy between two verdicts.
+A strict partial order defining the hierarchy.
 $$v_1 \succ v_2 \iff v_1.\alpha < v_2.\alpha$$
+*(Note: Per SIP-008, Level 0 is greater than Level 4).*
 
-**Key Properties:**
-* **Source:** Authority is derived strictly from the DID namespace.
-* **Immutability:** It is constitutionally fixed and **is not configurable at runtime**.
-* **Metric Nature:** Numerical comparison defines a strict **ordinal ordering** (Precedence), not a **cardinal magnitude**.
+### 4.4. Verdict Composition Operator ($\oplus$)
+The binary operator resolving two verdicts of **Equal Authority** ($v_1.\alpha = v_2.\alpha$):
 
-### 4.4. Directional Conflict Predicate ($\perp$)
-Defines a state of opposition between two vectors in the same authority plane.
-$$v_1 \perp v_2 \iff v_1.\delta \neq v_2.\delta$$
-
-### 4.5. Verdict Composition Operator ($\oplus$)
-The binary operator that resolves a set of applicable verdicts into a single outcome.
-$$V_{final} = \bigoplus_{v \in S_{valid}} v$$
+1.  **HALT absorbs everything.** ($HALT \oplus X = HALT$)
+2.  **DENY absorbs ALLOW and WARN.** ($DENY \oplus ALLOW = DENY$)
+3.  **WARN contaminates ALLOW.** ($ALLOW \oplus WARN = WARN$)
+4.  **ALLOW is the identity element** only if no negative force exists.
 
 ## 5. Execution Algorithm (Normative)
-Implementations of the Synapse Engine **MUST** strictly adhere to the following evaluation pipeline. The runtime is **stateless** with respect to the resolution process; it calculates the output solely from the current input vectors.
+Implementations of the Synapse Engine **MUST** strictly adhere to the following pipeline.
 
-**Algorithm: `Resolve(Verdicts[]) -> FinalVerdict`**
+**Algorithm:** `Resolve(Context, Verdicts[]) -> FinalVerdict`
 
-1.  **Validation & Filtering ($\Phi$):**
-    * Discard any verdict where `TargetScope` is not a subset of `VerdictScope`.
-    * Discard any malformed or unsigned verdicts (SIP-009 check).
-    * *Result:* `ValidSet`
 
-2.  **Authority Projection ($\Pi$):**
-    * If `ValidSet` is empty, goto **Step 4**.
-    * Find `BestAuthority` = `min(v.AuthorityLevel)` in `ValidSet`.
-    * Discard all verdicts where `v.AuthorityLevel > BestAuthority`.
-    * *Result:* `ProjectedSet` (All items share the same, highest authority).
 
-3.  **Composition ($\Sigma$):**
-    * Iterate through `ProjectedSet`:
-        * If any `v.Decision == HALT` $\rightarrow$ Return `HALT`.
-        * If any `v.Decision == DENY` $\rightarrow$ Mark `Denied = true`.
-    * If `Denied == true` $\rightarrow$ Return `DENY`.
-    * Return `ALLOW`.
+### Step 0: The Liability Preemption (SIP-011 Check)
+* Check `Context.OverrideToken`.
+* **If Valid:** STOP. Return logic defined in SIP-011 (Forensic Liability).
+* **Rationale:** Human liability preempts algorithmic calculation.
 
-4.  **Default Handling:**
-    * If no verdicts remain (Empty Set), apply **Section 6.1**.
+### Step 1: Validation & Applicability ($\Phi$)
+* Discard vectors where `TargetScope` is not in `v.Scope`.
+* Discard vectors where `v.τ` (Timestamp) is outside the allowed **Freshness Window** (Replay Protection).
+* **Result:** `ValidSet`.
 
-## 6. Edge Cases & Fail-Safes
+### Step 2: Authority Projection ($\Pi$)
+* If `ValidSet` is empty, goto Step 4.
+* Find `BestAuthority = min(v.α)` in `ValidSet`.
+* Discard all verdicts where `v.α > BestAuthority`.
+* **Result:** `ProjectedSet` (All items share the highest available authority).
 
-### 6.1. The Vacuum State (Empty Set)
-If no policy matches the target scope (or all are filtered out), the system enters a **Vacuum State**.
-* **Standard Rule:** The default behavior is **DENY** (Safe Failure).
-* **Rationale:** An unmanaged device is an unsafe device. Implicit allowances are forbidden.
+### Step 3: Composition ($\Sigma$)
+* Initialize `FinalDecision = ALLOW`.
+* Iterate through `ProjectedSet`:
+    * If any `v.δ == HALT` → Return `HALT`.
+    * If any `v.δ == DENY` → Set `FinalDecision = DENY` (and continue to check for HALT).
+    * If any `v.δ == WARN` AND `FinalDecision != DENY` → Set `FinalDecision = WARN`.
+* Return `FinalDecision`.
 
-### 6.2. The Pre-Law Override
-Physical safety interlocks (SIP-008 Pre-Law) exist **outside** this algebra.
-* If a hardware interlock triggers (e.g., E-Stop), the software verdict is irrelevant.
-* The Synapse Engine MUST report the override but CANNOT veto it.
+### Step 4: Default Handling (Vacuum State)
+* If no verdicts remain (Empty Set):
+* Return `DENY` (Fail-Closed).
 
-### 6.3. The Ambiguous Authority Conflict
-In the rare theoretical event of "Duplicate Authority" (e.g., two different signers with valid signatures claiming the exact same Authority Level and Scope but giving opposite commands):
-* The **Directional Conflict Predicate** applies.
-* The system treats them as standard vectors in the same plane.
-* **DENY** absorbs **ALLOW**.
+## 6. Edge Cases
+
+### 6.1. The Pre-Law Override (Physics)
+SIP-008 **Level ∞ (Pre-Law)** constraints are handled by firmware/hardware. If the Algebra outputs `ALLOW` but the Hardware Interlock says `NO`, the physical reality prevails.
+
+### 6.2. The Warn State
+A `WARN` verdict implies: *"The operation is permitted (ALLOW), but a specific risk flag MUST be logged in the Decision Record (SIP-003)."*
 
 ## 7. Formal Guarantees
-SIP-010 provides the following mathematical guarantees to the Sopcos ecosystem:
-
-1.  **Determinism:** For any given set of inputs, the output is always identical, regardless of computation order, concurrency, or system locale.
-2.  **Safety Monotonicity:** Adding a `DENY` verdict to any existing set of `ALLOW` verdicts can **only** change the result to `DENY`. It is mathematically impossible for a new policy to "accidentally" override a denial without possessing higher authority.
-3.  **Bounded Termination:** The resolution algorithm is $O(N)$ (Linear Time) and contains no recursion or infinite loops. It is guaranteed to halt.
-
-## 8. Closing Principle
-The algebra defined herein is designed to eliminate "interpretation" from the runtime.
-
-> **The machine must not guess. Silence is safer than error.**
->
-> *If the math does not yield a clear ALLOW, the answer is NO.*
-
----
-*Copyright © 2025 Sopcos Protocol Foundation. All Rights Reserved.*
+1.  **Determinism:** The output is independent of computation order.
+2.  **Safety Monotonicity:** Adding a `DENY` policy to a set can never inadvertently flip the result to `ALLOW`.
+3.  **Bounded Termination:** The algorithm is **O(N)**.

@@ -4,48 +4,72 @@
 | :--- | :--- |
 | **SIP** | 003 |
 | **Title** | Decision Semantics & Canonical State |
-| **Status** | RATIFIED |
+| **Status** | LIVING STANDARD (REVISED) |
 | **Type** | Standards Track (Core) |
 | **Author** | Maestro & Nexus (The Foundation) |
 | **Created** | 2025-12-24 |
+| **Last Revised** | 2026-01-05 |
 | **Layer** | Governance / Runtime |
+| **Requires** | SIP-010, SIP-011 |
 | **License** | CC0-1.0 (Public Domain) |
 
 ## 1. Abstract
-This proposal defines the technical and legal definition of a **"Valid Decision"** within the Sopcos ecosystem. It establishes the atomic structure of a decision object and clearly delineates the liability boundary between the **"Decision"** (Sopcos Protocol) and the **"Action"** (Control System). This standard serves as the "Source of Technical Truth" for auditors, insurers, and judicial bodies.
+This proposal defines the technical and legal definition of a **"Valid Decision"** within the Sopcos ecosystem. It establishes the atomic structure of a decision object using a **Composition Model**, capable of carrying both algorithmic verdicts and human interventions within a single schema.
+
+This standard serves as the **"Source of Technical Truth"** for auditors, insurers, and judicial bodies.
 
 ## 2. The Decision Canon
+For a data block to be considered a valid "Sopcos Decision" and committed to Axon, it must adhere to the following Atomic Structure.
 
-For a data block to be considered a valid "Sopcos Decision" and committed to Axon, it must contain the following **Atomic Structure**.
+### 2.1. Anatomy of a Valid Decision (Composition Schema)
+The Decision Object is a hybrid structure acting as a container for either Algorithmic Logic or Human Liability. Any decision lacking these fields or failing cryptographic verification is considered **"NULL AND VOID."**
 
-### 2.1. Anatomy of a Valid Decision
-Any decision lacking these fields or failing cryptographic verification is considered **"NULL AND VOID."**
+#### Verdict Vectors (Extended per SIP-010):
+* **ALLOW:** Operation authorized.
+* **DENY:** Operation strictly forbidden.
+* **WARN:** Operation authorized (ALLOW logic) but flagged with specific risk codes. Liability shifts to the operator/system acknowledging the warning.
+* **HALT:** Immediate cessation of operations requiring manual reset (Panic/Kill Switch).
+
+#### Structural Composition
+A valid decision **MUST** contain the following logical fields (represented here in pseudo-Go/JSON syntax):
 
 ```json
 {
-  "decision_id": "UUID-v4",          // Unique Decision Identifier
-  "timestamp_utc": "ISO-8601",       // UTC Timestamp (Not Gateway Local Time)
-  "input_hash": "SHA-256",           // Fingerprint of the payload (Privacy Preserved)
-  "policy_hash": "SHA-256",          // Hash of the SPL contract active at that moment
-  "rule_id": "String",               // Specific rule identifier (e.g., "SAFETY-RULE-01")
-  "verdict": "ALLOW | DENY | WARN",  // The Judgment
-  "gateway_id": "Public_Key_Hash",   // Identity of the Judge (Synapse Node)
-  "signature": "ECDSA_Signature"     // Non-repudiable seal of the Gateway
+  "verdict": "ALLOW | DENY | WARN | HALT",
+  "input_hash": "SHA256(Telemetry)",
+  "gateway_signature": "Ed25519_Signature",
+  
+  // Algorithmic Provenance (Always Present)
+  "policy_hash": "SHA256(SOP_Artifact)",
+  
+  // Human Liability Composition (Nullable / Optional)
+  // If this field is POPULATED, it acts as a 'Preemption' of the policy logic.
+  "override": {
+     "token": "Signed_Override_Token",
+     "signer_did": "did:sopcos:operator:123",
+     "justification_code": "CLASS_S_SAFETY",
+     "liability_hash": "SHA256(Context + Intent)"
+  } 
 }
 ```
-* **ALLOW:** Operation authorized.
-
-* **DENY:** Operation strictly forbidden.
-
-* **WARN:** Operation authorized but flagged as "At Risk." Liability shifts to the operator/system acknowledging the warning.
 
 ### 2.2. Validity Conditions
-1.  **Integrity:** `input_hash` and `policy_hash` must be consistent with the `verdict`.
-2.  **Authorship:** The `signature` must be verifiable against the `gateway_id`'s registered public key.
-3.  **Traceability:** The `policy_hash` must point to a valid, historically recorded SPL contract on Axon. Decisions based on "Ghost Policies" are invalid.
+Validity is determined by the presence or absence of the `override` struct (Composition Logic):
+
+#### Case A: Algorithmic Decision (Standard)
+* **Condition:** `override` is **NIL / NULL**.
+* **Validation:**
+    1.  `policy_hash` MUST point to a valid, active Policy Artifact on Axon.
+    2.  `verdict` MUST be the deterministic result of applying `policy_hash` logic to `input_hash`.
+
+#### Case B: Human Intervention (Override)
+* **Condition:** `override` is **POPULATED**.
+* **Validation:**
+    1.  The `override.token` MUST carry a valid signature from a registered DID.
+    2.  The `override.justification_code` MUST be a valid enumeration from SIP-006.
+    3.  **Note:** In this case, the verdict is forced by the human, effectively preempting the `policy_hash` logic. The `policy_hash` remains in the record for forensic comparison (*"What would the machine have done?"*).
 
 ## 3. The Liability Shield: Decision ≠ Action
-
 This section defines the legal liability boundary of the Sopcos Protocol.
 
 ### 3.1. Definition of Roles
@@ -53,29 +77,27 @@ This section defines the legal liability boundary of the Sopcos Protocol.
 * **Controller (PLC/SCADA):** Acts as a **"Policy Enforcement Point (PEP)."**
 
 ### 3.2. The Non-Action Clause
-> **"The Sopcos Protocol does not perform physical actions; it validates the legitimacy of intended actions."**
+**"The Sopcos Protocol does not perform physical actions; it validates the legitimacy of intended actions."**
 
 * **Incorrect Statement:** "Sopcos stopped the press machine."
 * **Correct Statement:** "Sopcos **FORBADE (DENY)** the operation of the press machine. The execution of this prohibition (cutting power) is the responsibility of the Controller Software."
 
 ### 3.3. Legal Implication
 If Sopcos issues a `DENY` verdict (signed and logged), but the machine continues to operate and causes an accident:
-* **Liability:** Lies solely with the **"Controller Software"** (Integrator/Vendor) or the Operator who bypassed the system.
+* **Liability:** Lies solely with the "Controller Software" (Integrator/Vendor) or the Operator who bypassed the system physically.
 * **Proof:** The signed `DENY` record on Axon serves as immutable proof that the Protocol fulfilled its duty, exonerating the Foundation and the Protocol logic.
 
 ## 4. Audit Semantics
-
 What guarantees does an Auditor or Court have when querying Axon?
 
 ### 4.1. Causality Guarantee
-The system provides a mathematical proof of causality:
-> **"At Time T, Decision Z was rendered based on Rule Y triggered by Data X."**
-No link in this chain can be retroactively altered.
+The system provides a mathematical proof of causality: *"At Time T, Decision Z was rendered based on [Rule Y OR Override O] triggered by Data X."* No link in this chain can be retroactively altered.
 
 ### 4.2. Non-Repudiation
-A Gateway (or its Operator) cannot claim *"I didn't make that decision, the logs were tampered with."*
-Since the decision is signed by the Gateway's **Private Key**, repudiation is mathematically impossible (equivalent to admitting key negligence).
+A Gateway (or its Operator) cannot claim *"I didn't make that decision, the logs were tampered with."* Since the decision is signed by the Gateway's Private Key (or the Operator's Key in override cases), repudiation is mathematically impossible (equivalent to admitting key negligence).
 
 ### 4.3. Privacy by Design
-Sopcos stores the `input_hash`, not the `raw_input`.
-This ensures that trade secrets or GDPR-sensitive data are not exposed on the Blockchain, while still allowing auditors to verify (by hashing their copy of the data) that the decision was correct.
+Sopcos stores the `input_hash`, not the `raw_input`. This ensures that trade secrets or GDPR-sensitive data are not exposed on the Blockchain, while still allowing auditors to verify (by hashing their copy of the data) that the decision was correct.
+
+---
+*Copyright © 2026 Sopcos Protocol Foundation. All Rights Reserved.*

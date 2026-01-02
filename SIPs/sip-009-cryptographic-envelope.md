@@ -3,141 +3,103 @@
 | Metadata | Value |
 | :--- | :--- |
 | **SIP** | 009 |
-| **Title** | Cryptographic Policy Envelope (SOP Format) |
-| **Status** | RATIFIED |
+| **Title** | Cryptographic Policy Envelope (SOP Artifact) |
+| **Status** | LIVING STANDARD (REVISED - WASM EDITION) |
 | **Type** | Standards Track (Interface) |
 | **Author** | The Architect (HQ) |
-| **Date** | 2025-12-30 |
-| **Layer** | Authoring, Axon, Synapse |
-| **Related** | SIP-006, SIP-008 |
+| **Date** | 2026-01-05 |
+| **Layer** | Tooling / Runtime |
+| **Requires** | SIP-001 (Source), SIP-008 (Authority) |
+| **Related** | SIP-010 (Algebra), SIP-002 (Kernel) |
 
 ## 1. Abstract
-This specification defines the **Sopcos Object Package (.sop)**, a cryptographically signed policy artifact format used for the distribution, verification, and execution of Sopcos Policy Code (WASM).
+This specification defines the **Sopcos Object Package (.sop)**, a cryptographically signed artifact containing hermetic, deterministic **WebAssembly (WASM)** bytecode.
 
-A `.sop` file is a **Policy Artifact**, not the policy itself. It is **never executable by default**. Execution is permitted **IFF** (if and only if) the artifact's hash is anchored and active on the Sopcos Chain (L1) via `OP_POLICY_ANCHOR`.
+To guarantee industrial safety and cross-platform consistency, Sopcos separates "Source Code" from "Executable Code":
+1.  **Source:** Defined in **SIP-001 (JSON)** for human auditability.
+2.  **Artifact:** Defined in **SIP-009 (WASM)** for machine determinism.
 
-## 2. Motivation
-Raw WASM binaries lack identity, provenance, authority binding, and temporal intent. In a governance-grade system, executable logic must be:
+A `.sop` file is the compiled, immutable representation of intent, executed within a strict sandbox to prevent "Parser Drift" or environment-specific behaviors.
 
-* **Authenticated:** Who wrote it?
-* **Attributed:** Under what authority?
-* **Immutable:** Has it changed?
-* **Contextual:** Where and when is it valid?
+## 2. Motivation: The Hermetic Imperative
+In safety-critical systems, relying on text-based interpretation (JSON Parsing) at runtime is dangerous due to minute differences in library implementations (e.g., Float handling in Rust vs. Go). WASM provides a **"Black Box"** guarantee:
 
-The SOP format creates a **Cryptographic Envelope** that binds policy logic with identity, scope, authority, and intent, while remaining compatible with deterministic compilation and reproducible builds.
+* **Write Once, Run Everywhere:** A policy compiled to WASM executes bit-by-bit identically on an ARM microcontroller and an x86 server.
+* **No Ambiguity:** The Runtime does not "interpret" intent; it executes instructions.
 
-## 3. Conceptual Model
-* **Policies are Laws.**
-* **WASM Binaries are Artifacts.**
-* **SOP is the Sealed Lawbook.**
+## 3. The Compilation Pipeline (Chain of Custody)
+The creation of a valid SIP-009 Artifact follows a strict "Chain of Custody":
 
-A `.sop` package:
-* Can be stored off-chain (IPFS, Vault, Object Storage).
-* MUST be signed by an authorized issuer.
-* MUST be hash-identical to the artifact anchored on L1.
-* MUST be delivered to Synapse only via a verified Policy Envelope.
+1.  **Authoring:** The Policy Author defines logic in SIP-001 JSON.
+2.  **Compilation:** The Sopcos Compiler (`scc`) verifies the JSON against the schema and compiles it into a linear, non-Turing-complete WASM module.
+3.  **Signing:** The Author calculates the hash of the WASM Bytecode and signs it, creating the SOP Envelope.
+4.  **Distribution:** The signed SOP is anchored on Axon.
 
-## 4. SOP Envelope Schema (Canonical)
+> **Legal Note:** The signature attests to the WASM. Since the WASM is deterministically generated from the JSON, the signature implicitly covers the Source Intent.
 
-All SOP files must conform to the following standard JSON schema:
+## 4. SOP Envelope Schema
+The `.sop` file is a JSON container wrapping the binary payload.
 
 ```json
 {
-  "format": "sop/1.0",
   "header": {
-    "issuer": "did:sopcos:org/siteA",
-    "signer": "did:key:z6Mk...",
-    "alg": "Ed25519",
-    "kid": "key-1",
-    "iat": 1700000000,
-    "nbf": 1700000000,
-    "exp": null
+    "alg": "EdDSA",
+    "typ": "SOP+WASM",
+    "kid": "did:sopcos:admin:001#key-1",
+    "compiler_version": "v1.2.4 (sha256:...)"
   },
   "payload": {
-    "policy_did": "did:sopcos:policy/siteA/boiler/safety",
-    "authority_level": 0,
-    "scope": "siteA/boiler_room/*",
-    "semantic_version": "1.2.0",
-    "wasm": "<BASE64_WASM_BYTES>"
+    "format": "wasm",
+    "bytecode": "base64_encoded_wasm_binary...",
+    "source_hash": "sha256(original_sip001_json)"
   },
-  "signature": "<HEX_SIGNATURE>"
+  "signature": "base64url_encoded_signature"
 }
 ```
+
 ## 5. Cryptographic Binding Rules
 
-### 5.1. Signing Scope (Normative)
-The signature MUST be calculated over the canonical serialization of:
-1.  `format`
-2.  `header`
-3.  `payload`
+### 5.1. Signing Scope
+The signature **MUST** be calculated over the canonical serialization of the payload object. Changing a single bit in the WASM bytecode invalidates the signature.
 
-This guarantees that **identity, authority, scope, version, and executable logic** are inseparable.
+### 5.2. Source Linkage
+The `source_hash` field allows auditors to verify that the WASM matches the original JSON.
+* **Verification:** An auditor can take the claimed JSON, run it through the specific `compiler_version`, and verify that the resulting bytecode matches the `payload.bytecode`.
 
-### 5.2. Algorithms
-* **Signature Algorithm:** Ed25519 (mandatory).
-* **Hash Algorithm:** SHA-256 (for artifact identity).
+## 6. The Hermetic Sandbox (Synapse Runtime)
+Synapse **MUST** execute the WASM payload in a restricted environment (Sandbox) defined as part of the Immutable Kernel (SIP-002).
 
-## 6. Identity & Authority Resolution
-* `signer`: Represents the cryptographic key holder.
-* `issuer`: Represents the **Policy Authority**.
+### 6.1. Import Restrictions (No Side Effects)
+The WASM module **MUST NOT** import any functions except the **Sopcos Host Functions (SHF)**:
+* `get_telemetry(key)`
+* `get_context_var(key)`
+* `emit_log(level, msg)`
 
-**Verification Rule:**
-The DID matching the `policy_did` MUST match the controller registered on L1.
-A valid signature is **necessary but not sufficient** for execution.
+**Prohibited:** Network access, File I/O, Random Number Generation, System Clock (Time must be injected via Context).
 
-## 7. Lifecycle & Validity Semantics
+### 6.2. Resource Metering (Gas)
+To prevent infinite loops (even though the Compiler attempts to prevent them), the Runtime **MUST** enforce strict instruction metering (Gas Limit). If execution exceeds the limit, the Verdict defaults to `DENY` (Fail-Safe).
 
-### 7.1. SOP vs. L1 Authority
-Time fields (`iat`, `nbf`, `exp`) express only the **author's intent**.
-The **effective validity** of a policy is determined solely by:
-1.  L1 Anchor State (`ACTIVE` / `REVOKED`).
-2.  L1 Validity Period.
+## 7. Authority Resolution
+The runtime extracts the `kid` (Key ID) from the header and resolves the **Authority Level** from the L1 Registry as defined in **SIP-008**.
 
-**Rule:** If SOP time fields and L1 registry conflict, **L1 prevails.**
-
-### 7.2. Revocation
-Revoking a policy on L1 does not invalidate past verdicts rendered while it was active.
+* *Clarification:* The WASM binary does not contain the Authority Level. Authority is a property of the Signer, not the Code.
 
 ## 8. Delivery & Execution Model
 
-### 8.1. Axon Responsibilities (Normative)
-Axon **MUST**:
-1.  Retrieve the SOP artifact from storage.
-2.  Verify the signature and authority.
-3.  Verify the artifact hash against the L1 registry.
-4.  Verify scope compatibility.
-5.  Construct a signed **PolicyEnvelope**.
+### 8.1. Axon Responsibilities
+Axon verifies the Signature and the L1 Anchor. It does not execute the code.
 
-Axon **MUST NOT**:
-1.  Execute code.
-2.  Interpret policy semantics.
-
-### 8.2. Synapse Responsibilities (Normative)
-Synapse **MUST**:
-1.  Accept ONLY verified Policy Envelopes.
-2.  Execute WASM in a hermetic environment.
-3.  Reject any artifact without L1 linkage.
-
-Synapse **MUST NOT**:
-1.  Perform trust establishment tasks.
-2.  Receive SOP artifacts directly.
+### 8.2. Synapse Responsibilities
+Synapse receives the Verified Envelope:
+1.  Instantiates the WASM module in the Sandbox.
+2.  Injects Input Telemetry and Context.
+3.  Invokes the `evaluate()` exported function.
+4.  Captures the returned Integer (`0=DENY`, `1=ALLOW`, `2=WARN`, `3=HALT`).
 
 ## 9. Security Considerations
-This specification mitigates:
-* Replay attacks.
-* Binary substitution.
-* Unauthorized policy injection.
-* Runtime compromise via artifact spoofing.
+* **Compiler Trust:** The security of the system relies on the correctness of the Sopcos Compiler. The Compiler is open-source and part of the audited Kernel.
+* **Opaque Binaries:** While WASM is binary, the mandatory `source_hash` ensures it can always be decompiled or recompiled for verification against the SIP-001 Source.
 
-The SOP format alone does not guarantee security. It operates within the constitutional constraints defined by the Governance Specification and SIP-008.
-
-## 10. Backward Compatibility
-This is the first normative definition of the SOP format. No backward compatibility is guaranteed.
-
-## 11. Conclusion
-The `.sop` format transforms executable policy code into a **verifiable, attributable, and governable legal artifact.**
-
-It is the final seal between **The Law (Policy)** and **The Execution (Runtime).**
-
----
-*Copyright © 2025 Sopcos Protocol Foundation. All Rights Reserved.*
+## 10. Conclusion
+SIP-009 bridges the gap between Human Intent (JSON) and Machine Reality (WASM). It ensures that "The Law" is executed with mathematical precision, unaffected by the vagaries of operating systems or parser libraries.

@@ -3,115 +3,87 @@
 | Metadata | Value |
 | :--- | :--- |
 | **SIP** | 001 |
-| **Title** | Sopcos Policy Language (SPL) |
-| **Status** | DRAFT |
+| **Title** | Sopcos Policy Language (SPL) Definition |
+| **Status** | LIVING STANDARD (REVISED) |
 | **Type** | Standards Track (Core) |
-| **Author** | Maestro, Nexus |
+| **Author** | Maestro, Nexus (Rev. by Legal Counsel) |
 | **Created** | 2025-12-22 |
-| **Layer** | Authoring |
-| **Discussions** | [GitHub Issue #1](https://github.com/sopcos/sopcos-specs/issues/1) |
+| **Last Revised** | 2026-01-05 |
+| **Layer** | Authoring / Parsing |
+| **Requires** | SIP-008, SIP-010 |
+| **Obsoletes** | SIP-001 (Draft v1) Conflict Resolution Logic |
 
-## Abstract
-Sopcos Policy Language (SPL) is a JSON-based, deterministic specification designed to validate intents within the Sopcos Ecosystem. Unlike traditional smart contracts, SPL is not a scripting language; it is a **configuration of law**. It defines whether an action is permissible without instructing the device on how to perform it.
+## 1. Abstract
+Sopcos Policy Language (SPL) is a JSON-based, deterministic specification designed to validate intents within the Sopcos Ecosystem. Unlike traditional smart contracts, SPL is not a scripting language; it is a **configuration of law**. It defines *whether* an action is permissible without instructing the device *how* to perform it.
 
-## Motivation
-In industrial IoT environments, "Code is Law" (Smart Contracts) introduces unacceptable risks: infinite loops, bugs, and lack of auditability.
-Sopcos introduces **"Policy as Data"**:
+> **Revision Note:** This document defines the **syntax and serialization** of the language. 
+> * For Authority Hierarchy, please refer to **SIP-008**.
+> * For Conflict Resolution Logic, please refer to **SIP-010**.
+
+## 2. Motivation
+In industrial IoT environments, "Code is Law" (Smart Contracts) introduces unacceptable risks. Sopcos introduces "Policy as Data":
 * **No Scripting:** Eliminates halting problems and security exploits.
 * **Deterministic:** The same input always results in the same verdict.
 * **Auditable:** Every decision is traceable to a specific policy hash.
 
-## Specification
+## 3. Specification
 
-### 1. Philosophy & Motto
-> "SPL does not instruct devices how to act. SPL defines whether an intent is permissible."
+### 3.1. Philosophy & Motto
+**"SPL does not instruct devices how to act. SPL defines whether an intent is permissible."**
 
 * **Verdict, Not Command:** SPL returns `ALLOW`, `DENY`, or `WARN`. It never returns low-level commands like `GPIO_HIGH`.
 * **Fail-Closed:** In the absence of a matching policy, the default behavior MUST be `DENY`.
 
-### 2. Identity & Authority
-A policy is only valid if it is signed by an authority recognized by the on-chain Registry.
+### 3.2. Identity & Authority
+A policy is a data object. Its validity is not intrinsic but derived from the **Cryptographic Envelope** defined in SIP-009 and the **Authority Graph** defined in SIP-008.
 
-```json
-{
-  "authority": {
-    "issuer_did": "did:sopcos:0x12ab...", 
-    "signature": "0xSIG_ED25519...",
-    "validity": {
-      "active_from": 1735000000,
-      "expires_at": 1766500000
-    }
-  }
-}
+* **Separation of Concerns:** The JSON payload defines the *Logic*. The Envelope signature defines the *Authority*.
 
-```
-### 3. Normative Domains (Definitions)
-Implementations **MUST** recognize the following domain hierarchy values.
+### 3.3. Normative Domains & Hierarchy (Revised)
+*(Updated to comply with SIP-008)*
 
-| Precedence | Domain | Value | Description |
-| :--- | :--- | :--- | :--- |
-| **1 (Highest)** | `SAFETY` | `0x03` | Life-safety critical logic. Overrides all. |
-| **2** | `SECURITY` | `0x02` | Access control, intrusion detection. |
-| **3** | `OPS` | `0x01` | Operational efficiency, scheduling. |
-| **4 (Lowest)** | `COMFORT` | `0x00` | User preferences, lighting scenes. |
+Implementations **MUST NOT** rely on arbitrary metadata integers or legacy `0x03` tags for authority precedence. Instead, implementations **MUST** map the signer's Identity (DID) to the Normative Authority Graph defined in SIP-008:
 
-### 4. Rules & Condition Context
+* **LVL 0:** Emergency
+* **LVL 1:** Regulatory
+* **LVL 2:** Site/Org
+* **LVL 3:** Optimization
+* **LVL 4:** Advisory
+
+*(Reference: SIP-008 Authority Hierarchy)*
+
+### 3.4. Rules & Condition Context
 SPL uses a context-aware condition model to ensure determinism.
 
-* **Trigger:** Defines when the policy is evaluated (e.g., `TELEMETRY`, `INCOMING_TX`, `BATCH_COMMIT`).
+* **Trigger:** Defines *when* the policy is evaluated (e.g., `TELEMETRY`, `INCOMING_TX`).
 * **Context:** Explicitly defines the data source (e.g., `LAST_TELEMETRY` vs `BATCH_AVG`).
 
-```json
-"rules": [
-  {
-    "trigger": "TELEMETRY",
-    "condition": {
-      "operator": "AND",
-      "criteria": [
-        { 
-          "context": "LAST_TELEMETRY",
-          "key": "temperature", 
-          "op": ">", 
-          "value": 80 
-        }
-      ]
-    },
-    "action": {
-      "effect": "DENY",
-      "reason_code": "HEAT_CRITICAL",
-      "audit_tag": "safety_violation_01"
-    }
-  }
-]
-```
+### 3.5. Conflict Resolution Logic (Revised)
+*(Completely Revised to comply with SIP-010)*
 
-### 5. Conflict Resolution Logic
-If multiple policies match a target, the Gateway/Node MUST resolve the conflict using the following logic:
+The "Priority Integer" mechanism found in previous drafts is **DEPRECATED**. If multiple policies match a target, the Gateway/Node **MUST** resolve the conflict using the Verdict Algebra defined in SIP-010:
 
-1.  **Domain Check:** The policy with the higher Normative Domain (e.g., `0x03` SAFETY > `0x02` SECURITY) wins.
-2.  **Priority Check:** If domains are equal, the higher priority integer defined in the policy metadata wins.
-3.  **Deterministic Tie-Breaker:** If both domain and priority are equal, compare the `policy_hash` bytes lexicographically. The higher value wins.
+1.  **Authority Dominance:** Higher Authority Level (according to SIP-008) strictly overrides Lower Authority.
+2.  **Deny Absorption:** If Authorities are equal, a `DENY` verdict absorbs any `ALLOW` verdict (`ALLOW × DENY = DENY`).
+3.  **Vacuum State:** If no valid policy matches, the result is `DENY`.
 
-### 6. System Defaults (Fail-Closed)
-To prevent "Silent Failures," deployments MUST specify default behaviors in the absence of matching policies.
+*(Reference: SIP-010 Verdict Algebra)*
 
-```json
-"defaults": {
-  "no_policy_match": "DENY", 
-  "audit_level": "FULL"
-}
-```
+### 3.6. System Defaults (Fail-Closed)
+To prevent "Silent Failures," deployments **MUST** specify default behaviors in the absence of matching policies.
 
-### 7. Canonical Serialization
-To ensure a unique and verifiable `policy_hash`, the JSON object MUST be serialized as follows before hashing:
+### 3.7. Canonical Serialization (CRITICAL)
+To ensure a unique and verifiable `policy_hash` (used in SIP-003 and SIP-009), the JSON object **MUST** be serialized as follows before hashing:
 
 * **Ordering:** Object keys MUST be sorted lexicographically (A-Z).
 * **Whitespace:** No whitespace allowed outside of string values (Compact JSON).
 * **Encoding:** UTF-8. No Byte Order Mark (BOM).
 * **Floats:** Must be represented without exponents if possible.
 
-## Rationale
-The decision to avoid Turing-complete scripting (WASM/Lua) on the verification layer is intentional. This ensures that the computational cost of policy evaluation is bounded (O(N)) and predictable, which is crucial for high-throughput IoT Gateways and real-time auditing.
+> **Note:** This serialization is the foundation of the "Cryptographic Binding" used in SIP-009 Envelopes.
 
-## Copyright
-Copyright and related rights waived via [MIT](https://opensource.org/licenses/MIT).
+## 4. Rationale
+The decision to avoid Turing-complete scripting ensures that policy evaluation is bounded (O(N)) and predictable. By offloading conflict resolution to the Runtime Algebra (SIP-010) and Authority to the Registry (SIP-008), SPL remains a pure, stateless definition of intent.
+
+## 5. Copyright
+Copyright and related rights waived via MIT.
