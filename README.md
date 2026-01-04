@@ -18,6 +18,9 @@ It serves as the **"Single Source of Truth"** for the Sopcos Protocol, Governanc
 | **[SIP-009](./SIPs/sip-009-cryptographic-envelope.md)** | Cryptographic Policy Envelope (SOP Format) | Standards Track | Ratified |
 | **[SIP-010](./SIPs/sip-010-verdict-algebra.md)** | The Verdict Algebra (Decision Resolution Logic) | Standards Track | Ratified |
 | **[SIP-011](./SIPs/sip-011-forensic-liability.md)** | Forensic Liability & Operational Semantics | Standards Track | Ratified |
+| **[SIP-012](./SIPs/sip-012-sovereign-mandate.md)**  | The Sovereign Mandate & Delegated Agency | Standards Track | PROPOSED STANDARD |
+| **[SIP-013](./SIPs/sip-013-telemetry-binding.md)** | Declared Reality Interface (DRI) & Telemetry Binding | Standards Track | Ratified |
+| **[SIP-014](./SIPs/sip-014-artifact-vault.md)** | Decentralized Artifact Vault & Lifecycle Registry | Standards Track | DRAFT |
 | **[SIP-Appendix-A](./SIP-Appendix-A.md)** | Canonical Incident Walkthrough: "The Legal Shield" | Appendix | Informational |
 
 ## Terminology
