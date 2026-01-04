@@ -42,6 +42,13 @@ A valid decision **MUST** contain the following logical fields (represented here
   // Algorithmic Provenance (Always Present)
   "policy_hash": "SHA256(SOP_Artifact)",
   
+  // [NEW] Telemetry Provenance (The Physical Link)
+  // This field links the logical data to the physical declaration defined in SIP-013.
+  "binding_provenance": {
+     "declaration_hash": "SHA256(Telemetry_Manifest_JSON)", 
+     "sensor_timestamp": 1700000000
+  },
+  
   // Human Liability Composition (Nullable / Optional)
   // If this field is POPULATED, it acts as a 'Preemption' of the policy logic.
   "override": {
