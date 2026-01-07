@@ -37,8 +37,9 @@ Sopcos defines a strict vertical hierarchy. Lower numerical values indicate high
 | **LVL 0** | **EMERGENCY** | Fire, Earthquake, Evacuation directives. | Only by Pre-Law |
 | **LVL 1** | **REGULATORY** | Legal limits, Environmental laws (EPA/OSHA). | By Emergency |
 | **LVL 2** | **SITE / ORG** | Corporate or Factory-wide policies. | By Regulatory/Emergency |
-| **LVL 3** | **OPTIMIZATION** | Efficiency, Cost-saving algorithms. | Always overridable |
-| **LVL 4** | **ADVISORY** | Recommendations, Logging, Telemetry config. | Lowest priority |
+| **LVL 3** | **OPTIMIZATION** | Efficiency algorithms. **Default level for AI Agents (Synapse/Axon).** | Always overridable |
+| **LVL 4** | **ADVISORY** | Recommendations, Logging. **Low-confidence AI signals (<50%) default here.** | Lowest priority |
+**Constraint (v1.2):** An AI Agent (Cognitive Node), regardless of its confidence score, **CANNOT** hold Level 0 (Emergency) or Level 1 (Regulatory) authority. These levels require a biological signature (Human) or a deterministic hard-coded rule (Pre-Law).
 
 ---
 

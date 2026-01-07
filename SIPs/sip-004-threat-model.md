@@ -59,6 +59,14 @@ This axiom asserts that a Gateway can technically follow all protocol rules (val
     * **Protocol Level:** None (Protocol worked).
     * **Legal Level:** High-liability lawsuit backed by **Proof of Foreknowledge**.
 
+### Scenario D: The "Confident Fool" (Hallucinating Agent) Context: An AI Agent (Axon) issues a high-confidence recommendation (e.g., 99.9%) to "Increase Pressure," contradicting physical safety norms or causing damage.
+* **The Issue:** Probabilistic error masquerading as certainty (Hallucination).
+* **Blame:** The Human Operator or Sovereign Entity who signed the SIP-012 Mandate authorizing this specific Agent.
+* **Proof:**
+    * The provenance.model_artifact and input_hash on Axon allow for Deterministic Replay.
+    * Auditors can re-run the exact same model with the exact same input to reproduce the hallucination, proving the error was in the "Delegate" (AI) authorized by the "Sovereign" (Human).
+* **Liability:** Under SIP-012, the liability strictly reverts to the mandate issuer. The machine cannot be sued.
+
 ## 4. Conclusion: The Scope of Sopcos
 Sopcos guarantees **Integrity** (The record hasn't changed) and **Authenticity** (Who signed it). While it does not strictly guarantee **Truth** (Is the input real?) or **Wisdom** (Is the rule smart?), it provides the tools (**SIP-005 Simulation** and **SIP-006 Override**) to document the lack thereof.
 

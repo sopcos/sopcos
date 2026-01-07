@@ -79,6 +79,7 @@ The `MandateToken` is a signed JSON object acting as a "Digital Power of Attorne
 The `delegate_did` **MUST** target a specific physical Node DID.
 * **Rationale:** Authority is granted based on trust in a specific hardware's integrity (TPM/Security).
 * **Replacement:** If `Node_01` fails and is replaced by `Node_02`, the Mandate is **VOID**. The Operator must sign a new Mandate for the new device. *"Trust follows the specific machine, not the location."*
+* **Cognitive Delegate Constraint:** If the `delegate_did` identifies a Cognitive Node (AI Agent), the MandateToken explicitly **FORBIDS** the granting of `TxTypeOverride` capabilities. The Machine can act as an Optimizer (Level 3), but never as an Override Authority (suspending the Normative Graph). The "Kill Switch" privilege remains exclusively Human.
 
 ## 5. Operational Semantics (Execution Logic)
 

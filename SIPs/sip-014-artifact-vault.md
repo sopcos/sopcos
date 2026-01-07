@@ -73,6 +73,12 @@ Declares an artifact as legally null and void (or dangerous).
 * **Payload:** `{ Target_URN, Revocation_Reason (SECURITY | LEGAL) }`
 * **Meaning:** *"Kill Switch. Any node running this Hash must halt immediately."*
 
+### 5.4. ARTIFACT_TYPE_MODEL_WEIGHTS (Cognitive Assets)
+To support SIP-015, the Vault recognizes AI Model Weights (e.g., .gguf, .onnx, .bin) as valid legal artifacts.
+* **Rationale:** To ensure "Forensic Replayability," the specific neural network state (weights) used to make a decision must be versioned and immutable.
+* **Payload:** { URN, Architecture (e.g., Llama-3), Quantization_Level, Training_Hash }
+* **Lifecycle:** Unlike Policy files, Model Artifacts often have a large storage footprint. Implementations MAY support "Hot/Cold" storage tiers, provided the integrity hash remains anchored on L1.
+
 ## 6. Security & Privacy
 
 ### 6.1. Client-Side Encryption
