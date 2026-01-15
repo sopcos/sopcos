@@ -37,6 +37,7 @@ The "Kernel" includes the following **IMMUTABLE** components. Modifying these lo
 4.  **Cryptographic Primitives:** Implementation of Ed25519 signatures and AES-GCM (SIP-009 Encryption).
 5.  **Deterministic Simulation Engine:** The logic producing "Proof of Foreknowledge" (SIP-005).
 6.  **Artifact Resolution Logic (New):** The specific routine defined in **SIP-014** for resolving URNs to Vault paths and verifying SHA-256 integrity before execution. A node explicitly **CANNOT** load code from arbitrary URLs.
+7.  **Industrial Asset Engine:** The native logic handling OpCodes 40-49 (SIP-016). It manages the creation, ownership transfer, and burning of Industrial NFTs. This logic MUST be deterministic and validated by all nodes. A failure in asset logic constitutes a consensus failure.
 
 * **The Evolution Clause:** The Kernel can **ONLY** be updated or patched through the official SIP process managed by The Foundation. Modifications outside this process result in the immediate loss of "Sopcos Compliant" status.
 

@@ -64,6 +64,7 @@ type RiskAssessment struct {
         Type      string `json:"type"`       // "LLM", "RAG", "RULE"
         ModelID   string `json:"model_id"`   // e.g., "llama3-8b-quantized"
         ModelHash string `json:"model_hash"` // Binary Hash (Which brain?)
+        LicenseTokenID string `json:"license_token_id,omitempty"` // SIP-016 NFT ID (Ownership/Rights)
     }
     
     PromptHash string `json:"prompt_hash"` // Hash of the prompt used (Replayability)
@@ -85,6 +86,8 @@ Synapse transforms its analysis into an "Offer." This is not an order.
 * **SuggestedVerdict:** `ALLOW`, `DENY`, or `ALERT`.
 
 * **ValidFor:** Expiration duration (AI decisions spoil quickly).
+
+* **Sensitive Recommendations (Cross-Ref SIP-017):** If the detected risk_category involves sensitive security vulnerabilities (e.g., Zero-Day) or trade secrets, the Agent **SHOULD** encapsulate the RecommendationEnvelope within a **SIP-017 Secure Message** targeting the System Admin, instead of broadcasting it as a cleartext `VerdictRecord` on L1. This constitutes the "Silent Alarm" protocol.
 
 ```go
 type RecommendationEnvelope struct {
@@ -128,6 +131,8 @@ The single record written to the Chain (Axon L1) possessing legal binding.
 
 ### 4.1. The "No-Hallucination" Check (Verification)
 Before generating a `VerdictRecord`, an AI Agent must present `ModelHash` and `PromptHash` values as proof. This ensures that in a future audit, the question "Why did you make this decision?" can be answered by re-running the exact same model with the exact same input (**Replayability**).
+
+**License Verification (Rights Check):** If a LicenseTokenID is provided in the RiskAssessment, the Agent **MUST** verify via the L1 State that the current Node Owner holds the specific NFT required to operate this Model. If the NFT is burned or transferred, the Agent MUST refuse to generate a verdict (DENY).
 
 ### 4.2. Mandate Dependency
 AI agents (Nodes) do not possess "Asset Ownership" on their own. Under SIP-012, an AI cannot function without a valid `MandateToken` signed by a Human Operator (Sovereign).

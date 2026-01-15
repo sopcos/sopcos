@@ -79,6 +79,12 @@ To support SIP-015, the Vault recognizes AI Model Weights (e.g., .gguf, .onnx, .
 * **Payload:** { URN, Architecture (e.g., Llama-3), Quantization_Level, Training_Hash }
 * **Lifecycle:** Unlike Policy files, Model Artifacts often have a large storage footprint. Implementations MAY support "Hot/Cold" storage tiers, provided the integrity hash remains anchored on L1.
 
+### 5.5. ARTIFACT_TYPE_ASSET_METADATA 
+JSON schemas defining the immutable properties of a SIP-016 Industrial Asset.
+* **Rationale:**  SIP-016 NFTs store ownership on-chain, but their descriptive data (Specifications, Manuals, Blueprints) resides in the Vault.
+* **Payload:**  { Name, SerialNumber, ManufacturingDate, Specifications{}, ImageURI, SchemaVersion }
+* **Linkage:**  The MetadataHash in a SIP-016 asset MUST match the SHA-256 of this artifact.
+
 ## 6. Security & Privacy
 
 ### 6.1. Client-Side Encryption

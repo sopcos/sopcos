@@ -37,8 +37,6 @@ Every conversion (Analog to Digital, Raw to Scaled) is an interpretation. SIP-01
 ## 4. The Artifact: Telemetry Binding Manifest (Schema v1.1)
 The Manifest is a JSON document stored as a `.json` or `.sop` artifact in the SIP-014 Vault. It **MUST** adhere to the following schema structure:
 
-
-
 ```json
 {
   "header": {
@@ -69,6 +67,10 @@ The Manifest is a JSON document stored as a `.json` or `.sop` artifact in the SI
   "signature": "base64_signature..."
 }
 ```
+## 4.1 (Binding Types)
+**INPUT_TYPE_STREAM (Non-Deterministic Source)** Represents unstructured continuous data flows required for the Cold Path (Cognitive Analysis). Unlike Registers, these are not polled in the strict real-time loop but are sampled for the AI Agent.
+* **Examples:** Audio Spectrum (/dev/audio0), CCTV Frame (rtsp://camera1), System Logs (/var/log/syslog).
+* **Handling:** Data is buffered and passed to the SIP-015 Engine. It is **NOT** used for SIP-001 Logic evaluation to preserve determinism.
 
 ## 5. Vault Integration & Lifecycle (SIP-014)
 Unlike static config files, SIP-013 Manifests have a lifecycle managed by the L1 Chain.
