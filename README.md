@@ -8,19 +8,15 @@
 
 ## 🏗️ Abstract
 
-**SOPCOS** is a deterministic industrial protocol designed to close the **Liability Gap**
-in autonomous and semi-autonomous systems (Industry 4.0 / 5.0).
+**SOPCOS** is a deterministic industrial protocol designed to close the **Liability Gap** in autonomous and semi-autonomous systems (Industry 4.0 / 5.0).
 
-While existing systems optimize machines for speed and efficiency,
-SOPCOS addresses the missing layer:
+While existing systems optimize machines for speed and efficiency, SOPCOS addresses the missing layer:
 
 **legal ownership of machine decisions.**
 
-SOPCOS transforms automated actions into **verifiable, attributable,
-and non-repudiable verdicts**.
+SOPCOS transforms automated actions into **verifiable, attributable, and non-repudiable verdicts**.
 
-We do not merely optimize machines.  
-**We legalize the relationship between humans, machines, and decisions.**
+We do not merely optimize machines. **We legalize the relationship between humans, machines, and decisions.**
 
 > **The fundamental question SOPCOS answers:**  
 > **“Who decided — and who is responsible?”**
@@ -29,22 +25,19 @@ We do not merely optimize machines.
 
 ## 🛡️ Core Philosophy — *Trust, Executed*
 
-Traditional systems focus on **data**.  
-SOPCOS focuses on the **verdict**.
+Traditional systems focus on **data**. SOPCOS focuses on the **verdict**.
 
 * **Speed** requires reflex → **Synapse**
 * **Trust** requires record → **Core Ledger**
 * **Liability** requires signature → **Human Authority**
 
-SOPCOS acts as a **digital notary** for autonomous systems.  
-It does not judge decisions — it **proves** them.
+SOPCOS acts as a **digital notary** for autonomous systems. It does not judge decisions — it **proves** them.
 
 ---
 
 ## 🔌 The Four Pillars of Architecture
 
-SOPCOS is not a single product.  
-It is an ecosystem with **strict separation of powers**.
+SOPCOS is not a single product. It is an ecosystem with **strict separation of powers**.
 
 ---
 
@@ -103,8 +96,7 @@ The identity layer for machines and models.
 
 ## What SOPCOS Is Not
 
-Clarity requires boundaries. SOPCOS is defined as much by what it **refuses to be**
-as by what it is.
+Clarity requires boundaries. SOPCOS is defined as much by what it **refuses to be** as by what it is.
 
 * **SOPCOS is not a SCADA system.**  
   It does not visualize dashboards or operate actuators. It notarizes decisions.

@@ -9,7 +9,7 @@
 
 ## 🛡️ Executive Anchor
 
-> *“SOPCOS is the industrial operating layer that makes machine decisions legally ownable.”*
+> *“SOPCOS is the industrial operating layer that makes machine decisions legally ownable and non-repudiable.”*
 
 Industry 4.0 focused on speed.  
 Industry 5.0 focused on human–machine collaboration.  
@@ -31,14 +31,22 @@ They cannot prove **why** it happened, or **who is responsible**, with legal cer
 
 The core thesis of SOPCOS is simple:
 
-> **Speed requires reflex.  
-> Trust requires record.  
-> Liability requires signature.**
+> **Speed requires reflex (Synapse).  
+> Trust requires record (Core Ledger).  
+> Liability requires signature (Human/Vinci).**
 
 - **SOPCOS is not a SCADA.**  
   It is the notary that audits the SCADA.
 - **SOPCOS is not an AI project.**  
   It is a governance layer that confines AI within explicit limits.
+
+#### 1.1 The Ring Logic (Hierarchy of Reality)
+SOPCOS applies a Ring Protection Model to industrial decision-making:
+- **Ring 0 (Level ∞): PHYSICS (Pre-Law).** Hard-coded firmware and physical limits. Cannot be overriden. 
+- **Ring 1 (Level 1-2): CONSTITUTION.** SPL policies (Regulatory/Site). Law made executable. 
+- **Ring 2 (Level 3): OPERATOR.** Human will and judgment. Sovereignty over software. 
+- **Ring 3 (Level 4-5): INTELLIGENCE.** AI, optimization, analytics. Always overridable. 
+
 
 ---
 
@@ -56,10 +64,9 @@ It is an organism with distinct, constrained components.
 The edge component that directly interfaces with machines.
 
 - **Task:** Reads declared reality (**SIP-013**) and enforces policy (**SIP-001**).
-- **Pre-Law:** Absolute physical and engineering constraints.
+- Pre-Law (Level ∞):** Synapse enforces hard interlocks that human overrides cannot bypass (e.g., physical melting points). 
 - **Hot Path:**  
-  In case of imminent danger, SYNAPSE intervenes **immediately**,  
-  deterministically, without latency, and without consultation.
+  In case of imminent danger, SYNAPSE intervenes **immediately**, deterministically, without latency, and without consultation.
 
 > Safety is created first.  
 > Evidence is written second.
@@ -68,14 +75,10 @@ The edge component that directly interfaces with machines.
 
 ### 🧠 2.2 AXON — The Cognition (Cold Path, Optional)
 
-**“The reasoning capability of the system.”**
+**“The Cognitive Auditor.”**
 
-- **Bicameral Mind:**  
-  Decision (Synapse) is separated from cognition (Axon).
-- **Cold Path:**  
-  Performs long-horizon analysis and predictive maintenance.
-- **Silent Alarm:**  
-  Using **SIP-017**, critical insights are delivered privately via encrypted channels.
+**Privacy (SIP-017):** Critical alerts (e.g., Zero-Day vulnerabilities) are sent via "The Red Phone" directly to the admin, keeping secrets off the public ledger. 
+**Cognitive Constraint:** AI can recommend but cannot authorize Level 0/1 actions.
 
 AXON may **recommend**.  
 It never authorizes.
@@ -90,21 +93,17 @@ It never authorizes.
 - Does not judge  
 - Only **proves**
 
-Using the **SIP-014 Vault** architecture, only cryptographic fingerprints
-are anchored. Evidence outlives infrastructure failure.
+**Vault Protocol (SIP-014):** Artifacts (WASM, Manifests) are stored in WORM (Write Once, Read Many) compliant vaults. The chain holds the truth; the vault holds the weight. 
 
 ---
 
 ### 🆔 2.4 IDAS — Industrial Digital Assets
 
-**“Machines with identity.”**
-
-Under **SIP-016**, industrial devices carry immutable identities:
+**Industrial NFTs (IDAS):** Machines and AI models are unique, transferable digital twins with verifiable provenance and service history. 
 
 - Ownership
 - Maintenance history
 - Authority and licensing constraints
-
 Unauthorized components cannot silently enter the system.
 
 ---
@@ -133,22 +132,20 @@ Unauthorized components cannot silently enter the system.
 
 SOPCOS provides a **legal security envelope**, not just technology.
 
-- **Human Override:**  
-  Overrides are allowed, but under **SIP-006**, they require a signed  
+- **Human Override:**  Overrides are allowed, but under **SIP-006**, they require a signed  
   **Confession of Liability**. Responsibility becomes explicit.
-- **Proof of Foreknowledge:**  
-  **SIP-005** simulations eliminate “we did not know” defenses.
-- **Data Sovereignty:**  
-  Data remains in sovereign vaults. Only hashes are anchored.
+  **Dirty State:** Any override triggers a "Dirty State" (Compliance Contamination). Only an independent Auditor can sign a **Reset_Transaction** to restore "Clean State."
+  **Sovereign Mandate (SIP-012):** Allows humans to delegate authority to machines for a specific time window, solving the "Monday Signature, Friday Accident" gap. 
+- **Data Sovereignty:** Data remains in sovereign vaults. Only hashes are anchored.
 
 ---
 
 ## 5. Conclusion
 
-SOPCOS moves AI and distributed ledgers beyond hype  
-and into **industrial-grade governance infrastructure**.
+SOPCOS moves AI and distributed ledgers beyond hype and into **industrial-grade governance infrastructure**.
 
 We are not making machines smarter.  
 We are making **decisions accountable**.
 
 **SOPCOS — Trust, Executed.**
+ 

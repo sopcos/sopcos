@@ -2,7 +2,7 @@
 
 > **Status:** Normative Reference  
 > **Scope:** Authority hierarchy, override semantics & liability transfer  
-> **Derived from:** SIP-006 (Emergency Semantics), SIP-008 (Authority Hierarchy & Lifecycle Governance), SIP-015 (Cognitive Verdicts)
+> **Derived from:**  SIP-006 (Emergency), SIP-008 (Hierarchy), SIP-011 (Forensic Liability), SIP-012 (Mandate), SIP-015 (Cognitive Verdicts)
 
 This document defines the canonical hierarchy of actors within the SOPCOS ecosystem.
 It specifies **who may do what**, **under which constraints**, and **how liability is transferred**
@@ -25,11 +25,12 @@ strictly ordered **Authority Level** system.
 
 | Level | Hex Role | Actor | Description | Capabilities |
 | :---: | :---: | :--- | :--- | :--- |
-| **0** | `0x00` | **PHYSICS (Pre-Law)** | Immutable physical and safety constraints. | Cannot be overridden. (e.g., temperature > melting point, hard interlocks). |
-| **1** | `0x01` | **SOPCOS FOUNDATION** | Protocol stewards and guardians. | Can initiate SIP lifecycle actions (ratification, revision, supersede, revoke) **with required consensus**. Cannot access user data. |
-| **2** | `0x10` | **FACTORY / SITE ADMIN** | Asset owner and operational authority. | Can deploy SIP-001 policies, configure site constraints, register/burn IDAS assets. |
-| **3** | `0x20` | **OPERATOR (Human-in-the-Loop)** | On-site human authority. | Can trigger **Emergency Override**. Cannot change policy definitions. |
-| **4** | `0x30` | **AXON AI (Cognitive Agent)** | Advisory intelligence. | Can **suggest actions** and execute **only pre-authorized actions** within policy bounds. **Cannot expand scope. Cannot override.** |
+| **∞** | 0xFF | **PRE-LAW (Physics)** | Immutable physical and hardware limits. | **Absolute Ruler.** Cannot be overridden by any human or software. |
+| **0** | 0x00 | **EMERGENCY** | Fire, Explosion, Life Safety. | Can override all normative levels (1-4) to prevent imminent harm. |
+| **1** | 0x01 | **REGULATORY** | Legal limits (OSHA, EPA). | Defines the boundary of legal operation. Can revoke lower artifacts. |
+| **2** | 0x10 | **SITE / ORG** | Factory owner / Asset authority. | Deploy site-specific policies and manage IDAS digital twins. |
+| **3** | 0x20 | **OPTIMIZATION (AI)** | Default for AI Agents & Algorithms. | Efficiency-driven actions. Always overridable by humans. |
+| **4** | 0x30 | **ADVISORY** | Low-confidence signals / Logging. | Non-binding recommendations. Minimal authority. |
 | **5** | `0x99` | **AUDITOR** | Independent inspector / verifier. | Can sign **Reset_Transaction** to clear Dirty State after inspection and attestation. |
 
 ---
@@ -39,17 +40,29 @@ strictly ordered **Authority Level** system.
 ### Default Rule
 A lower-authority level **cannot** violate constraints set by a higher-authority level.
 
-### Emergency Exception
-The **Emergency Override** allows a lower-authority human actor (e.g., **Operator, LVL 3**)  
-to temporarily violate a higher-level policy **only** to prevent imminent harm.
+##### Execution Preemption & Confession of Liability
+Human intervention is not a request for permission; it is an  **Execution Preemption**.
+*   **Signed Confession:** Overrides are cryptographically signed admissions of full liability.
+*   **Physics Constraint:** Overrides  **CANNOT**  bypass Level ∞ (Pre-Law) constraints. Physics always wins.
+*   **Temporal Limit (TTL):** Every override MUST have a Time-To-Live. Reverts to Fail-Safe on expiry.
+
 
 ### Consequence: Dirty State
 When an Emergency Override occurs:
 - The system enters **DIRTY STATE**
 - **Liability is cryptographically transferred** to the overriding actor’s DID
+- System returns to normal ONLY via an Auditor's **Reset_Transaction** 
 - The action and context are immutably recorded
 - Normal optimization and AI execution paths are suspended
 
+---
+#### 📜 Sovereign Mandate (SIP-012)
+A Human Sovereign may delegate specific authority to a Machine Delegate for a time window.
+*   **Inter-Temporal Liability:** The "Monday Signer" remains liable for a "Friday Accident".
+*   **Anti-Zombie Rule:** Mandates are voided if the node remains offline beyond `max_offline_ttl`.
+*   **AI Constraint:** AI Delegates cannot hold Override or Level 0/1 authority.
+
+---
 > Overrides are not bypasses.  
 > They are **signed confessions of responsibility**.
 
@@ -70,7 +83,8 @@ If a reset is **not** signed, Dirty State **persists**.
 
 ## 🤖 AI Constraints (Fail-Closed)
 
-- AI agents **cannot** hold LVL 0 or LVL 1 authority
+-  **Cognitive Auditor Role:** AI is an observer and advisor, not an authority.
+-  **No Autonomy:** AI agents  **cannot**  hold LVL 0 or LVL 1 authority.
 - AI agents **cannot** initiate overrides
 - AI agents **cannot** expand policy scope
 - AI recommendations are **non-binding**

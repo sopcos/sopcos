@@ -1,15 +1,12 @@
 # ⭕ Ring Logic — The Hierarchy of Reality
 
 > **Status:** Normative Reference  
-> **Scope:** Reality hierarchy, conflict resolution & liability boundaries  
-> **Related:** SOPCOS Authority Matrix (SAM), SIP-006, SIP-008, SIP-010
+> **Scope:**  Reality hierarchy, conflict resolution, liability boundaries & cognitive oversight
+> **Related:**  SAM (Authority Matrix), SIP-006, SIP-008, SIP-010, SIP-011, SIP-012, SIP-015, SIP-017
 
-SOPCOS applies a **Ring Protection Model**, inspired by operating system kernels,
-to **industrial liability and automated decision-making**.
+SOPCOS applies a **Ring Protection Model**, inspired by operating system kernels, to **industrial liability and automated decision-making**.
 
-Each ring represents a different layer of reality.
-Higher rings may influence lower rings **only within explicitly defined limits**.
-Some rings can **never** be overridden.
+Each ring represents a different layer of reality. Higher rings may influence lower rings **only within explicitly defined limits**. Some rings can **never** be overridden.
 
 ---
 
@@ -17,8 +14,8 @@ Some rings can **never** be overridden.
 
 ### 🔴 Ring 0 — The Core (Pre-Law)
 
-**Domain:** Hardware & Physics  
-**Authority:** Absolute  
+**Domain:** Hardware & Physics (**Level ∞**)
+**Authority:** Absolute Ruler 
 **Overridable:** ❌ Never
 
 **Examples**
@@ -30,15 +27,15 @@ Some rings can **never** be overridden.
 **SOPCOS Role**
 - *Synapse Pre-Law*
 
-> Ring 0 represents reality itself.  
+> Ring 0 represents reality itself (Level ∞). 
 > SOPCOS does not argue with physics.
 
 ---
 
 ### 🟠 Ring 1 — The Constitution
 
-**Domain:** SOPCOS Policy (SPL)  
-**Authority:** Legal, safety, and regulatory limits  
+**Domain:** Executable Law (SPL) (**Level 1-2**)  
+**Authority:** Regulatory & Site Constraints
 **Overridable:** ⚠️ Only by Ring 2 (with liability)
 
 **Examples**
@@ -49,44 +46,45 @@ Some rings can **never** be overridden.
 **SOPCOS Role**
 - *Synapse Policy Engine*
 
-> Ring 1 is **law made executable**.  
+> Ring 1 is  **Law Made Executable** .
 > It defines what the system is allowed to do.
 
 ---
 
 ### 🟡 Ring 2 — The Operator
 
-**Domain:** Human Will & Judgment  
-**Authority:** Intervention  
+**Domain:** Human Will & Judgment (**Level 0 / 3**)  
+**Authority:** Execution Preemption  
 **Overridable:** ❌ Cannot override Ring 0
 
 **Capabilities**
-- Can override Ring 1 under emergency semantics
 - Cannot modify policy definitions
+- **Execution Preemption:** Can suspend Ring 1 policies under SIP-006 semantics.
+- **Sovereign Mandate (SIP-012):** Can delegate specific authority to Ring 3 for a fixed time window.
 - Cannot bypass physical constraints
 
 **SOPCOS Role**
 - *Vinci Wallet Signer*
 
-> Ring 2 exists because humans may perceive
+> Ring 2 exists because humans (Sovereigns) are the sole owners of liability 
 > hazards that sensors cannot.
 
 ---
 
 ### 🟢 Ring 3 — The Intelligence
 
-**Domain:** AI, optimization, analytics  
-**Authority:** Recommendation & efficiency  
+**Domain:** Cognitive Oversight (**Level 3-4**) 
+**Authority:** Recommendation & Advisory  
 **Overridable:** Always
 
 **Capabilities**
-- Suggest actions
-- Optimize within constraints
+- **Cognitive Auditor:** Generates probabilistic risk assessments and recommendations.
+- **Silent Alarm (SIP-017):** Delivers sensitive alerts via "The Red Phone" without public broadcast
 - Execute **only pre-authorized actions**
 
 **Restrictions**
-- Cannot override Ring 1
-- Cannot override Ring 2
+- **No Autonomy:** Cannot hold Level 0 or Level 1 authority [11, 12].
+- Cannot initiate Overrides.
 - Cannot expand scope
 
 **SOPCOS Role**
@@ -108,10 +106,9 @@ If **Ring 3 (AI)** says:
 But **Ring 1 (Policy)** says:
 > “Limit reached”
 
-**Verdict:** `DENY`
+**Verdict:**  `DENY` (Authority Dominance) 
 
-**Rationale:**  
-Safety and law outrank optimization.
+**Rationale:** Level 1-2 (Policy) strictly overrides Level 3
 
 ---
 
@@ -123,22 +120,21 @@ If **Ring 2 (Human)** says:
 But **Ring 1 (Policy)** says:
 > “Unsafe”
 
-**Verdict:** `ALLOW + DIRTY_STATE`
+**Verdict:** `ALLOW + DIRTY_STATE` (Execution Preemption)
 
 **Rationale:**  
-The human may perceive an emergency not captured by sensors.  
-The system allows the action **but transfers liability**.
+The human preempts the algorithmic verdict and accepts full cryptographic liability
 
 ---
 
 ### Case 3 — Any Ring vs Physics
 
-If any ring attempts to violate **Ring 0**:
+If any ring attempts to violate **Ring 0 (Level ∞)**:
 
-**Verdict:** `DENY`
+**Verdict:** `DENY` (Pre-Law Absolute) 
 
 **Rationale:**  
-Physical reality cannot be overridden.
+The system accepts the liability (Override) but acknowledges the impossibility (Physics).
 
 ---
 
@@ -147,10 +143,10 @@ Physical reality cannot be overridden.
 When Ring 2 overrides Ring 1:
 
 - The system enters **DIRTY STATE**
-- Liability is cryptographically bound to the human signer
+- **Compliance Debt:** A procedural debt that must be recorded
 - All actions are logged with full context
 - Normal AI optimization is suspended
-- Recovery requires auditor inspection and signed reset
+- **Recovery:** Requires a Level 5 Auditor's **Reset_Transaction**
 
 > Overrides are not shortcuts.  
 > They are **explicit admissions of responsibility**.

@@ -13,16 +13,16 @@ If this document conflicts with a **LIVING STANDARD** SIP, the SIP prevails.
 
 ## 1. Governance Model
 
-SOPCOS follows a model of **Controlled Freedom**: open participation with strict constraints designed to prevent fragmentation and preserve industrial-grade accountability. :contentReference[oaicite:5]{index=5}
+SOPCOS follows a model of **Controlled Freedom**: open participation with strict constraints designed to prevent fragmentation and preserve industrial-grade accountability. 
 
 ### 1.1 The Foundation (Steward, Not Dictator)
 
 The Foundation is the protocol steward:
 - Manages the SIP process
 - Holds trademark stewardship
-- Coordinates releases and canonical documentation :contentReference[oaicite:6]{index=6}
+- Coordinates releases and canonical documentation
 
-**Hard constraint:** The Foundation cannot finalize a SIP or introduce breaking changes to core SPL without technical consensus from **at least 3 independent Core Maintainers** (not employed by the same legal entity). :contentReference[oaicite:7]{index=7}
+**Hard constraint:** The Foundation cannot finalize a SIP or introduce breaking changes to core SPL without technical consensus from **at least 3 independent Core Maintainers** (not employed by the same legal entity).
 
 ---
 
@@ -32,9 +32,9 @@ The Foundation is the protocol steward:
 Core Maintainers:
 - Review SIPs for determinism, safety, and conflict consistency
 - Gate changes to the Immutable Kernel boundary
-- Provide the consensus required for ratification and breaking change approval (see Section 3) :contentReference[oaicite:8]{index=8}
+- Provide the consensus required for ratification and breaking change approval (see Section 3)
 
-**Independence requirement:** “3 independent” means **not employed by the same legal entity**. :contentReference[oaicite:9]{index=9}
+**Independence requirement:** “3 independent” means **not employed by the same legal entity**.
 
 ### 2.2 SIP Editors (Process Operators)
 SIP Editors ensure:
@@ -44,10 +44,10 @@ SIP Editors ensure:
 - Editorial clarity without altering normative meaning
 
 ### 2.3 Policy Authors & Operational Oversight
-Policy authors define rules but do not write protocol code. SPL policies must be signed according to authority rules. :contentReference[oaicite:10]{index=10}
+Policy authors define rules but do not write protocol code. SPL policies must be signed according to authority rules.
 
 ### 2.4 Role Mapping (RBAC via Credentials)
-Operational roles (e.g., CISO, HSE Officer, Metrologist) are bound to DIDs via a signed Role Verifiable Credential, issued by the Foundation or enterprise admin, and verified by runtime for restricted actions. :contentReference[oaicite:11]{index=11}
+Operational roles (e.g., CISO, HSE Officer, Metrologist) are bound to DIDs via a signed Role Verifiable Credential, issued by the Foundation or enterprise admin, and verified by runtime for restricted actions.
 
 ---
 
@@ -62,17 +62,17 @@ All other statuses are non-binding.
 ### 3.2 Consensus Threshold for Binding Changes
 To ratify a SIP into binding law, or to approve breaking changes affecting the core SPL/kernel semantics:
 - The Foundation process must be completed **and**
-- Technical consensus must be recorded from **≥ 3 independent Core Maintainers**. :contentReference[oaicite:12]{index=12}
+- Technical consensus must be recorded from **≥ 3 independent Core Maintainers**.
 
 ### 3.3 Non-Breaking Revisions vs Breaking Changes
 - **Non-breaking revisions** (clarifications, errata, disambiguation) may be merged with standard maintainer review.
-- **Breaking changes** to the Immutable Kernel boundary require the consensus threshold above. :contentReference[oaicite:13]{index=13}
+- **Breaking changes** to the Immutable Kernel boundary require the consensus threshold above.
 
 ---
 
 ## 4. The Immutable Kernel Boundary
 
-SIP-002 defines an **IMMUTABLE Kernel**. Modifying these logics disqualifies a node from SOPCOS compliance. :contentReference[oaicite:14]{index=14}
+SIP-002 defines an **IMMUTABLE Kernel**. Modifying these logics disqualifies a node from SOPCOS compliance.
 
 Immutable Kernel includes (non-exhaustive, canonical list):
 1. SPL Parser (SIP-001)
@@ -81,15 +81,15 @@ Immutable Kernel includes (non-exhaustive, canonical list):
 4. Cryptographic Primitives (incl. envelope crypto per SIP-009)
 5. Deterministic Simulation Engine (SIP-005)
 6. Artifact Resolution Logic (SIP-014 path/URN verification; no arbitrary URLs)
-7. Industrial Asset Engine (SIP-016 OpCodes 40–49) :contentReference[oaicite:15]{index=15}
+7. Industrial Asset Engine (SIP-016 OpCodes 40–49)
 
-**Evolution Clause:** The Kernel can ONLY be updated through the official SIP process managed by the Foundation; out-of-process modifications lose “Sopcos Compliant” status. :contentReference[oaicite:16]{index=16}
+**Evolution Clause:** The Kernel can ONLY be updated through the official SIP process managed by the Foundation; out-of-process modifications lose “Sopcos Compliant” status. 
 
 ---
 
 ## 5. Authority Model & Lifecycle Governance
 
-SOPCOS authority is derived from the **signer DID anchored on L1**, not from file metadata. :contentReference[oaicite:17]{index=17}
+SOPCOS authority is derived from the **signer DID anchored on L1**, not from file metadata.
 
 ### 5.1 Authority Levels (Execution)
 SOPCOS defines a strict hierarchy (lower number = higher authority):
@@ -98,15 +98,15 @@ SOPCOS defines a strict hierarchy (lower number = higher authority):
 - **LVL 1 REGULATORY**
 - **LVL 2 SITE / ORG**
 - **LVL 3 OPTIMIZATION** (default for AI agents)
-- **LVL 4 ADVISORY** :contentReference[oaicite:18]{index=18}
+- **LVL 4 ADVISORY**
 
-**Constraint:** AI agents cannot hold LVL 0 or LVL 1 authority. :contentReference[oaicite:19]{index=19}
+**Constraint:** AI agents cannot hold LVL 0 or LVL 1 authority.
 
 ### 5.2 Artifact Lifecycle Permissions (REGISTER / SUPERSEDE / REVOKE)
 Lifecycle governance follows the permission matrix:
 - **REGISTER:** any valid DID may register artifacts at their own level
 - **SUPERSEDE:** author may supersede their own artifact; higher authority may supersede lower authority; lower/equal authority cannot supersede higher authority
-- **REVOKE:** author may revoke their own artifact; LVL 0/1 may revoke lower artifacts as “supreme court” :contentReference[oaicite:20]{index=20}
+- **REVOKE:** author may revoke their own artifact; LVL 0/1 may revoke lower artifacts as “supreme court”
 
 ---
 
@@ -156,3 +156,4 @@ When disputes arise:
 
 > SOPCOS governance is designed to prevent a liability vacuum.  
 > Change is allowed. Ambiguity is not.
+ 
