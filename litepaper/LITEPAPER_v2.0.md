@@ -73,10 +73,11 @@ The edge component that directly interfaces with machines.
 
 ---
 
-### 🧠 2.2 AXON — The Cognition (Cold Path, Optional)
+##### 🧠 2.2 AXON (L2) — The Cognition (Cold Path)
 
-**“The Cognitive Auditor.”**
-
+**“The reasoning capability of the system.”**
+* **Bicameral Mind:** Decision (Synapse) is separated from cognition (Axon).
+* **L2 Interface:** Acts as the secure intermediary for Synapse, isolating the Edge from direct L1 access.
 **Privacy (SIP-017):** Critical alerts (e.g., Zero-Day vulnerabilities) are sent via "The Red Phone" directly to the admin, keeping secrets off the public ledger. 
 **Cognitive Constraint:** AI can recommend but cannot authorize Level 0/1 actions.
 
@@ -85,7 +86,7 @@ It never authorizes.
 
 ---
 
-### 🏛️ 2.3 CORE LEDGER — The Immutable Record
+ ##### 🏛️ 2.3 SOPCOS CHAIN (L1) — The Immutable Record
 
 **“The memory and notary of the system.”**
 

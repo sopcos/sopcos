@@ -87,8 +87,8 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 - Cannot initiate Overrides.
 - Cannot expand scope
 
-**SOPCOS Role**
-- *Axon Node*
+**SOPCOS Role:** 
+*Axon (L2 Protocol)* - Intelligence that advises and prepares final L1 records.
 
 > Intelligence without authority is safe.  
 > Authority without intelligence is dangerous.  

@@ -89,7 +89,7 @@ Immutable Kernel includes (non-exhaustive, canonical list):
 
 ## 5. Authority Model & Lifecycle Governance
 
-SOPCOS authority is derived from the **signer DID anchored on L1**, not from file metadata.
+SOPCOS authority is derived from the **signer DID anchored on Sopcos Chain**, not from file metadata.
 
 ### 5.1 Authority Levels (Execution)
 SOPCOS defines a strict hierarchy (lower number = higher authority):

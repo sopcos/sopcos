@@ -16,7 +16,9 @@
 | **SOP Artifact (.sop)** | The compiled, signed, and hermetic **WebAssembly (WASM)** package. It serves as the bridge between the human-readable "Source Code" (SIP-001) and the deterministic "Machine Code" (SIP-009). | SIP-009 |
 | **Kernel** | The immutable core components of the system: SPL Parser, Decision Engine, Cryptographic Primitives, and the Simulation Engine. These cannot be modified by vendors without losing certification. | SIP-002 |
 | **Synapse (Runtime)** | The operational engine (Node) of Sopcos. It acts as a **PDP (Policy Decision Point)**. It does not perform physical actions; it issues Verdicts regarding their legitimacy. | SIP-002 |
-| **Axon (Chain)** | The L1 blockchain layer. It serves as the "Root of Legal Truth" where all policies, identities (DIDs), and immutable logs are anchored. | SIP-002 |
+| **Axon (L2 Protocol)** | The cognitive and analytical layer (Cold Path) that serves as an L2 bridge between Synapse and the Sopcos Chain. It performs long-horizon analysis and anchors finalized verdicts to L1. | SIP-015
+| **Sopcos Chain (L1)** | The core immutable ledger and "Immortal Notary" of the system. It anchors the ultimate legal truth, DIDs, and cryptographic fingerprints of all artifacts. | SIP-002
+| **Core Ledger** | A functional role of the Sopcos Chain (L1) that ensures the immutability of recorded verdicts and responsibility transfers. | README
 | **Override Token** | A digital structure created during a human intervention. It contains the signature, justification code, and context hash. It is the proof that responsibility has transferred from the machine to the human. | SIP-011 |
 | **Forensic Snapshot** | A cryptographic lock (Hash) of the raw sensor data and active policy hash at the exact moment of an Override. | SIP-006 |
 | **Simulated Decision** | A decision generated in "Simulation Mode" for advisory purposes. It is logged but not executed. | SIP-005 |

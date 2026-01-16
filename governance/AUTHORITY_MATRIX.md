@@ -94,7 +94,7 @@ If a reset is **not** signed, Dirty State **persists**.
 
 ## 🔐 Identity & Verification
 
-- Authority is derived from the **signer DID anchored on L1**
+- Authority is derived from the **signer DID anchored on the Sopcos Chain (L1)**
 - Role assignments are verified via **Role Verifiable Credentials**
 - File metadata or UI context **does not** grant authority
 

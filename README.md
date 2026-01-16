@@ -54,12 +54,12 @@ The edge execution layer.
 
 ---
 
-### 🧠 2. AXON — *Cognition & Cold Path* (Optional)
+### 🧠 2. AXON (L2) — *Cognition & Cold Path*
 
 The analytical reasoning layer.
 
 * Performs historical and predictive analysis
-* Uses a **bicameral mind** model (thinking ≠ deciding)
+* Acts as the L2 bridge, writing final truth to the Sopcos Chain (L1)
 * Generates early warnings and silent alerts
 * Never executes physical actions directly
 
@@ -68,7 +68,7 @@ The analytical reasoning layer.
 
 ---
 
-### 🏛️ 3. CORE LEDGER — *The Immutable Record*
+##### 🏛️ 3. SOPCOS CHAIN (L1) — *The Immutable Record*
 
 The memory and notary of the system.
 

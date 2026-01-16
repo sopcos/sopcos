@@ -33,7 +33,7 @@ The "Kernel" includes the following **IMMUTABLE** components. Modifying these lo
 
 1.  **SPL Parser:** Logic for interpreting SIP-001 policy syntax.
 2.  **Decision Engine:** The deterministic evaluation logic (SIP-010 Algebra).
-3.  **Audit Commit Logic:** The mechanism for hashing and committing decisions to Axon.
+3.  **Audit Commit Logic:** The mechanism for hashing and committing decisions to the Sopcos Chain (L1) via the Axon (L2) protocol.
 4.  **Cryptographic Primitives:** Implementation of Ed25519 signatures and AES-GCM (SIP-009 Encryption).
 5.  **Deterministic Simulation Engine:** The logic producing "Proof of Foreknowledge" (SIP-005).
 6.  **Artifact Resolution Logic (New):** The specific routine defined in **SIP-014** for resolving URNs to Vault paths and verifying SHA-256 integrity before execution. A node explicitly **CANNOT** load code from arbitrary URLs.
@@ -72,8 +72,8 @@ Certification is treated as a living mechanism.
 * **Time-Bound:** "Certified Node Keys" are issued with an expiration date.
 * **Revocation (CRL):** The Foundation maintains a Certificate Revocation List (CRL). If a node ignores a SIP-014 Revocation Order, its certificate is revoked immediately.
 
-### 4.2. Canonical Axon (Root of Legal Truth)
-* **Definition:** "Canonical Axon" is the main chain recognized by The Foundation.
+### 4.2. Canonical Sopcos Chain (Root of Legal Truth)
+* **Definition:** "Canonical Sopcos Chain" is the main L1 ledger recognized by The Foundation.
 * **Legal Standing:** In the event of industrial disputes, audits, or insurance claims, only records found on the Canonical Axon are considered "Legal Truth."
 
 ## 5. Threat Mitigation (The Hostile Takeover Defense)
