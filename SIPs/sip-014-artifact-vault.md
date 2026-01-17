@@ -28,7 +28,7 @@ For a forensic liability protocol, this is unacceptable. A court case ten years 
 ## 3. Architectural Philosophy
 
 ### 3.1. Storage as "Dumb Vault" vs. Chain as "Smart Registry"
-The storage layer must remain passive and immutable. The intelligence—who uploaded it, is it still valid, what replaced it—resides exclusively on the **Chain**.
+The storage layer must remain passive and immutable. The intelligence-who uploaded it, is it still valid, what replaced it-resides exclusively on the **Chain**.
 
 ### 3.2. Provider Agnosticism (The Abstracted Layer)
 Sopcos does not mandate a specific vendor (e.g., AWS). It mandates the **S3 Protocol Interface**. This allows for a flexible deployment strategy:

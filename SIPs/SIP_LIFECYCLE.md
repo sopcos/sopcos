@@ -1,5 +1,5 @@
 # 🔁 SIP Lifecycle Diagram (Textual Spec)
-## SOPCOS Improvement Proposal Process — State Machine & Transition Rules
+## SOPCOS Improvement Proposal Process - State Machine & Transition Rules
 
 > **Purpose:** Define the canonical lifecycle of a SIP document as a governance-controlled artifact.
 > This is a **meta / non-normative** specification intended to remove ambiguity from process.

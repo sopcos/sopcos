@@ -2,7 +2,7 @@
 > **Scope:** SOPCOS v1.0 Public Release
 ---
 # 🚀 SOPCOS Release Strategy v1.0  
-## “Anchor Release” — Governance Before Adoption
+## “Anchor Release” - Governance Before Adoption
 
 **Release Codename:** Anchor  
 **Protocol Version:** SOPCOS v1.0  
@@ -66,17 +66,17 @@ but **cannot rewrite its foundations**.
 The following SIPs are **LIVING STANDARDS** and constitute enforceable protocol law:
 
 #### Core Governance, Decision & Liability
-- SIP-001 — Sopcos Policy Language (SPL)
-- SIP-002 — Governance, Roles & Licensing
-- SIP-003 — Decision Semantics & Canonical State
-- SIP-004 — Threat Model & Accountability
-- SIP-005 — Simulation & Proof of Foreknowledge
-- SIP-006 — Human Override & Liability Transfer
-- SIP-008 — Authority Hierarchy & Lifecycle Governance
-- SIP-009 — Cryptographic Policy Envelope (.sop)
-- SIP-010 — Verdict Algebra
-- SIP-011 — Forensic Liability Semantics
-- SIP-013 — Declared Reality Interface (Telemetry Binding)
+- SIP-001 - Sopcos Policy Language (SPL)
+- SIP-002 - Governance, Roles & Licensing
+- SIP-003 - Decision Semantics & Canonical State
+- SIP-004 - Threat Model & Accountability
+- SIP-005 - Simulation & Proof of Foreknowledge
+- SIP-006 - Human Override & Liability Transfer
+- SIP-008 - Authority Hierarchy & Lifecycle Governance
+- SIP-009 - Cryptographic Policy Envelope (.sop)
+- SIP-010 - Verdict Algebra
+- SIP-011 - Forensic Liability Semantics
+- SIP-013 - Declared Reality Interface (Telemetry Binding)
 
 These define the **minimum viable rule-of-law system**.
 
@@ -84,8 +84,8 @@ These define the **minimum viable rule-of-law system**.
 
 ### 3.2 Non-Normative but Canonical Guidance
 
-- SIP-Appendix-A — Canonical Incident Walkthrough  
-- Glossary — Terminology Reference
+- SIP-Appendix-A - Canonical Incident Walkthrough  
+- Glossary - Terminology Reference
 
 These documents **do not define law**,  
 but explain how the law behaves in reality.
@@ -129,7 +129,7 @@ This release **rejects** the following interpretations:
 
 ### 6.1 Primary: Industrial & Legal Stakeholders
 **Message:**  
-> “This system tells you who is responsible — with cryptographic proof.”
+> “This system tells you who is responsible - with cryptographic proof.”
 
 Focus:
 - Regulators
@@ -201,4 +201,4 @@ No ecosystem incentives.**
 This release is intentionally conservative.
 
 Because in industrial reality,  
-**moving fast and breaking things is not innovation — it is negligence.**
+**moving fast and breaking things is not innovation - it is negligence.**

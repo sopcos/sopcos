@@ -99,7 +99,7 @@ These documents:
 
 They exist to declare **scope, intent, and boundaries** of a specific public release.
 
-- 👉 **[Release Strategy v1.0 — “Anchor Release”](./Release_Strategy_v1.0.md)**
+- 👉 **[Release Strategy v1.0 - “Anchor Release”](./Release_Strategy_v1.0.md)**
 
 ---
 

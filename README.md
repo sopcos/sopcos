@@ -1,4 +1,4 @@
-# 🦅 SOPCOS — The Industrial Trust Protocol
+# 🦅 SOPCOS - The Industrial Trust Protocol
 
 ### System of Phronetic Control & Open Safety
 
@@ -19,11 +19,11 @@ SOPCOS transforms automated actions into **verifiable, attributable, and non-rep
 We do not merely optimize machines. **We legalize the relationship between humans, machines, and decisions.**
 
 > **The fundamental question SOPCOS answers:**  
-> **“Who decided — and who is responsible?”**
+> **“Who decided - and who is responsible?”**
 
 ---
 
-## 🛡️ Core Philosophy — *Trust, Executed*
+## 🛡️ Core Philosophy - *Trust, Executed*
 
 Traditional systems focus on **data**. SOPCOS focuses on the **verdict**.
 
@@ -31,7 +31,7 @@ Traditional systems focus on **data**. SOPCOS focuses on the **verdict**.
 * **Trust** requires record → **Core Ledger**
 * **Liability** requires signature → **Human Authority**
 
-SOPCOS acts as a **digital notary** for autonomous systems. It does not judge decisions — it **proves** them.
+SOPCOS acts as a **digital notary** for autonomous systems. It does not judge decisions - it **proves** them.
 
 ---
 
@@ -41,7 +41,7 @@ SOPCOS is not a single product. It is an ecosystem with **strict separation of p
 
 ---
 
-### 🔌 1. SYNAPSE — *Reflex & Hot Path*
+### 🔌 1. SYNAPSE - *Reflex & Hot Path*
 
 The edge execution layer.
 
@@ -54,7 +54,7 @@ The edge execution layer.
 
 ---
 
-### 🧠 2. AXON (L2) — *Cognition & Cold Path*
+### 🧠 2. AXON (L2) - *Cognition & Cold Path*
 
 The analytical reasoning layer.
 
@@ -68,7 +68,7 @@ The analytical reasoning layer.
 
 ---
 
-##### 🏛️ 3. SOPCOS CHAIN (L1) — *The Immutable Record*
+##### 🏛️ 3. SOPCOS CHAIN (L1) - *The Immutable Record*
 
 The memory and notary of the system.
 
@@ -81,7 +81,7 @@ The memory and notary of the system.
 
 ---
 
-### 🆔 4. IDAS — *Industrial Digital Assets*
+### 🆔 4. IDAS - *Industrial Digital Assets*
 
 The identity layer for machines and models.
 
@@ -141,7 +141,7 @@ SIPs define:
 
 ## ⚖️ Human Authority & Accountability
 
-SOPCOS does not eliminate human responsibility — it **formalizes** it.
+SOPCOS does not eliminate human responsibility - it **formalizes** it.
 
 * **Override:**  
   A human may intervene, but must sign a cryptographic acceptance of liability.
@@ -163,7 +163,7 @@ SOPCOS does not eliminate human responsibility — it **formalizes** it.
 * **Core Implementations:** In progress  
 * **Release Strategy:** Deliberate, staged, and non-hyped  
 
-SOPCOS is built as critical infrastructure — not a demo.
+SOPCOS is built as critical infrastructure - not a demo.
 
 ---
 

@@ -1,7 +1,7 @@
 > **Status:** Meta / Non-Normative  
 > **Scope:** SOPCOS v1.0 Release Notes
 ---
-# 📦 SOPCOS Release Notes — v1.0  
+# 📦 SOPCOS Release Notes - v1.0  
 ## “Anchor Release”
 
 **Release Codename:** Anchor  
@@ -51,7 +51,7 @@ These elements collectively define:
 - Machines may evaluate and recommend
 - Humans remain **legally and cryptographically accountable**
 
-Overrides are no longer “bypasses” —  
+Overrides are no longer “bypasses” -  
 they are **signed confessions of responsibility**.
 
 ---
@@ -145,7 +145,7 @@ These limitations are **documented, not hidden**.
 
 This release establishes the **anchor point** from which all future SOPCOS evolution must proceed.
 
-Breaking this foundation would not be an upgrade —  
+Breaking this foundation would not be an upgrade -  
 it would be a breach of trust.
 
 ---

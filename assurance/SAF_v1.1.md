@@ -27,7 +27,7 @@ SAF does not define protocol behavior. It provides an **interpretive lens** for 
 When correctly implemented, SOPCOS provides the following mathematically verifiable assurances that may be relied upon during claims assessment and legal review:
 
 ### 2.1 Non-Repudiation
-Biometrically signed human interventions (Vinci) are cryptographically bound to a Decentralized Identifier (DID), making denial of authorship materially infeasible.
+Biometrically signed human interventions (VINCI) are cryptographically bound to a Decentralized Identifier (DID), making denial of authorship materially infeasible.
 
 ### 2.2 Proof of Notification
 It can be demonstrated that:
@@ -41,9 +41,9 @@ The identity of hardware components and associated AI models involved in an inci
 
 ---
 
-## 3. Incident Evidence Package (IEP) — v1.1
+## 3. Incident Evidence Package (IEP) - v1.1
 
-Forensic analysis and claims assessment may rely on a structured **Incident Evidence Package (IEP)**, sometimes described as an *“Industrial Black Box”*.
+Forensic analysis and claims assessment may rely on a structured **Incident Evidence Package (IEP)**, sometimes described as an *“Industrial Black Box”* recorded on the Core Ledger.
 
 ### 3.1 IEP Components
 
@@ -71,7 +71,7 @@ The following mappings illustrate **typical interpretive patterns** for insurers
 
 - **Vinci Event:** `OVERRIDE`  
 - **Indicative Interpretation:**  
-  Authority was transferred from automated enforcement  to a human actor.
+  Authority was transferred from automated enforcement (Synapse) to a human actor.
   Evidence may support classification as   **human intervention** or **operational negligence**, depending on context.
 
 ### 4.3 Foreknowledge with Bypass
@@ -90,8 +90,7 @@ The following mappings illustrate **typical interpretive patterns** for insurers
 ---
 
 ## 5. AI and Cognitive Oversight (SIP-015)
-
-Within SOPCOS, Artificial Intelligence is treated as a  **cognitive auditor**, not an authority.
+Within SOPCOS, Artificial Intelligence is treated as a **cognitive auditor (Axon)**, not an authority.
 
 ### 5.1 Deterministic Replay
 When an AI-generated recommendation is questioned, the decision context can be reconstructed using:

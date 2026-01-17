@@ -1,10 +1,10 @@
-# ⭕ Ring Logic — The Hierarchy of Reality
+# ⭕ Ring Logic - The Hierarchy of Reality
 
 > **Status:** Normative Reference  
 > **Scope:**  Reality hierarchy, conflict resolution, liability boundaries & cognitive oversight
 > **Related:**  SAM (Authority Matrix), SIP-006, SIP-008, SIP-010, SIP-011, SIP-012, SIP-015, SIP-017
 
-SOPCOS applies a **Ring Protection Model**, inspired by operating system kernels, to **industrial liability and automated decision-making**.
+SOPCOS applies a **Ring Protection Model**, inspired by operating system kernels, to **industrial liability and automated enforcement**.
 
 Each ring represents a different layer of reality. Higher rings may influence lower rings **only within explicitly defined limits**. Some rings can **never** be overridden.
 
@@ -12,7 +12,7 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 
 ## The Rings
 
-### 🔴 Ring 0 — The Core (Pre-Law)
+### 🔴 Ring 0 - The Core (Pre-Law)
 
 **Domain:** Hardware & Physics (**Level ∞**)
 **Authority:** Absolute Ruler 
@@ -32,9 +32,9 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 
 ---
 
-### 🟠 Ring 1 — The Constitution
+### 🟠 Ring 1 - The Constitution
 
-**Domain:** Executable Law (SPL) (**Level 1-2**)  
+**Domain:** Enforceable Law (SPL) (**Level 1-2**)  
 **Authority:** Regulatory & Site Constraints
 **Overridable:** ⚠️ Only by Ring 2 (with liability)
 
@@ -46,12 +46,12 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 **SOPCOS Role**
 - *Synapse Policy Engine*
 
-> Ring 1 is  **Law Made Executable** .
+> Ring 1 is  **Law Made Enforceable** .
 > It defines what the system is allowed to do.
 
 ---
 
-### 🟡 Ring 2 — The Operator
+### 🟡 Ring 2 - The Operator
 
 **Domain:** Human Will & Judgment (**Level 0 / 3**)  
 **Authority:** Execution Preemption  
@@ -71,7 +71,7 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 
 ---
 
-### 🟢 Ring 3 — The Intelligence
+### 🟢 Ring 3 - The Intelligence
 
 **Domain:** Cognitive Oversight (**Level 3-4**) 
 **Authority:** Recommendation & Advisory  
@@ -80,7 +80,7 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 **Capabilities**
 - **Cognitive Auditor:** Generates probabilistic risk assessments and recommendations.
 - **Silent Alarm (SIP-017):** Delivers sensitive alerts via "The Red Phone" without public broadcast
-- Execute **only pre-authorized actions**
+- Perform **only pre-authorized actions**
 
 **Restrictions**
 - **No Autonomy:** Cannot hold Level 0 or Level 1 authority [11, 12].
@@ -88,7 +88,7 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 - Cannot expand scope
 
 **SOPCOS Role:** 
-*Axon (L2 Protocol)* - Intelligence that advises and prepares final L1 records.
+*Axon* - Intelligence that advises and prepares final Core Ledger records.
 
 > Intelligence without authority is safe.  
 > Authority without intelligence is dangerous.  
@@ -98,7 +98,7 @@ Each ring represents a different layer of reality. Higher rings may influence lo
 
 ## ⚖️ Conflict Resolution Rules
 
-### Case 1 — AI vs Policy
+### Case 1 - AI vs Policy
 
 If **Ring 3 (AI)** says:
 > “Accelerate”
@@ -112,7 +112,7 @@ But **Ring 1 (Policy)** says:
 
 ---
 
-### Case 2 — Human vs Policy
+### Case 2 - Human vs Policy
 
 If **Ring 2 (Human)** says:
 > “Open door”
@@ -127,7 +127,7 @@ The human preempts the algorithmic verdict and accepts full cryptographic liabil
 
 ---
 
-### Case 3 — Any Ring vs Physics
+### Case 3 - Any Ring vs Physics
 
 If any ring attempts to violate **Ring 0 (Level ∞)**:
 
@@ -146,7 +146,7 @@ When Ring 2 overrides Ring 1:
 - **Compliance Debt:** A procedural debt that must be recorded
 - All actions are logged with full context
 - Normal AI optimization is suspended
-- **Recovery:** Requires a Level 5 Auditor's **Reset_Transaction**
+- **Recovery:** Requires a Level 5 Auditor's **Reset Transaction**
 
 > Overrides are not shortcuts.  
 > They are **explicit admissions of responsibility**.
@@ -167,5 +167,5 @@ If ambiguity exists, the system **fails closed**.
 ## Final Principle
 
 > SOPCOS does not ask *who is smart*.  
-> It proves *who was responsible* —  
+> It proves *who was responsible* -  
 > and respects reality above all else.

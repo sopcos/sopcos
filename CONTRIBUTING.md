@@ -85,7 +85,7 @@ The following contributions will be closed without review:
 
 ## The SIP-First Workflow
 
-### Step 1 — Start with a SIP
+### Step 1 - Start with a SIP
 
 Before writing code or proposing behavior changes:
 
@@ -100,7 +100,7 @@ Before writing code or proposing behavior changes:
 
 ---
 
-### Step 2 — Discussion Before Implementation
+### Step 2 - Discussion Before Implementation
 
 - SIPs are discussed **before** implementation
 - Consensus focuses on:
@@ -113,7 +113,7 @@ Code without accepted governance rationale will not be merged.
 
 ---
 
-### Step 3 — Review & Ratification
+### Step 3 - Review & Ratification
 
 Depending on scope:
 - Editorial changes may be merged after review

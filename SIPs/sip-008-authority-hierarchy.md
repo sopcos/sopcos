@@ -3,7 +3,7 @@
 | Metadata | Value |
 | :--- | :--- |
 | **SIP** | 008 |
-| **Title** | Authority Hierarchy & Lifecycle Governance |
+| **Title** | Authority Hierarchy & Lifecycle Control |
 | **Status** | LIVING STANDARD (REVISED - LIFECYCLE READY) |
 | **Type** | Standards Track (Core) |
 | **Author** | The Architect (HQ) |
@@ -15,20 +15,20 @@
 ---
 
 ## 1. Abstract
-This specification establishes the **Normative Authority Graph** defining "Who outranks Whom" in decision-making, and extends this logic to the **Lifecycle Governance** of Artifacts stored in the SIP-014 Vault.
+This specification establishes the **Normative Authority Graph** defining "Who outranks Whom" in decision-making, and extends this logic to the **Lifecycle Control** of Artifacts stored in the SIP-014 Vault.
 
 It answers two fundamental questions:
-1.  **Execution:** If two active policies conflict, which one prevails?
+1.  **Resolution:** If two active policies conflict, which one prevails?
 2.  **Evolution:** Who has the right to update (`SUPERSEDE`) or destroy (`REVOKE`) an existing law?
 
 ## 2. Core Axioms
-1.  **Source of Power:** Authority is derived from the **DID (Decentralized Identifier)** anchored on the L1 Registry, not from metadata inside the file.
+1.  **Source of Power:** Authority is derived from the **DID (Decentralized Identifier)** anchored on the Core Ledger registry, not from metadata inside the file.
 2.  **The Pre-Law Reality:** Policy Code is Executable Law, but Physics is Immutable Reality.
 3.  **Bureaucratic Sovereignty:** An entity can only evolve (supersede) artifacts they own or artifacts owned by strictly lower authorities.
 
 ---
 
-## 3. The Normative Authority Graph (Execution Levels)
+## 3. The Normative Authority Graph (Authority Levels)
 Sopcos defines a strict vertical hierarchy. Lower numerical values indicate higher authority.
 
 | Level | Name | Description | Override Semantics |
@@ -37,13 +37,13 @@ Sopcos defines a strict vertical hierarchy. Lower numerical values indicate high
 | **LVL 0** | **EMERGENCY** | Fire, Earthquake, Evacuation directives. | Only by Pre-Law |
 | **LVL 1** | **REGULATORY** | Legal limits, Environmental laws (EPA/OSHA). | By Emergency |
 | **LVL 2** | **SITE / ORG** | Corporate or Factory-wide policies. | By Regulatory/Emergency |
-| **LVL 3** | **OPTIMIZATION** | Efficiency algorithms. **Default level for AI Agents (Synapse/Axon).** | Always overridable |
+| **LVL 3** | **OPTIMIZATION** | Efficiency algorithms. **Default level for AI-derived artifacts (Synapse/Axon).** | Always overridable |
 | **LVL 4** | **ADVISORY** | Recommendations, Logging. **Low-confidence AI signals (<50%) default here.** | Lowest priority |
-**Constraint (v1.2):** An AI Agent (Cognitive Node), regardless of its confidence score, **CANNOT** hold Level 0 (Emergency) or Level 1 (Regulatory) authority. These levels require a biological signature (Human) or a deterministic hard-coded rule (Pre-Law).
+**Constraint (v1.2):** An AI-derived artifact, regardless of its confidence score, **CANNOT** hold Level 0 (Emergency) or Level 1 (Regulatory) authority. These levels require a biological signature (Human) or a deterministic hard-coded rule (Pre-Law).
 
 ---
 
-## 4. Lifecycle Governance Matrix (The "Supersede" Logic)
+## 4. Lifecycle Control Matrix (The "Supersede" Logic)
 This section defines the permissions for **SIP-014 Vault Operations**. It enforces the "Chain of Custody" and prevents lower-tier actors from modifying higher-tier laws.
 
 ### 4.1. Definitions
@@ -64,7 +64,7 @@ This section defines the permissions for **SIP-014 Vault Operations**. It enforc
 
 ---
 
-## 5. Conflict Resolution Semantics (Execution Time)
+## 5. Conflict Resolution Semantics (Evaluation Time)
 While Section 4 deals with "Updating Files," this section deals with "Resolving Active Conflicts" (Logic defined in SIP-010).
 
 ### 5.1. Vertical Resolution (Dominance)
@@ -90,5 +90,5 @@ A Global Authority can **SHUTDOWN** (restrict) a Local Operation, but it **CANNO
 ## 7. Human Override: Liability Substitution
 A Human Override (SIP-006) does not create a "Level -1" policy.
 * **Suspension:** It suspends the Normative Graph (Levels 0-4).
-* **Substitution:** It replaces the algorithm with a **Sole Liability Record** anchored to the signer's DID.
+* **Substitution:** It replaces the algorithm with a **Sole Liability Record** anchored to the signer's DID on the Core Ledger.
 * **Constraint:** It CANNOT suspend Level ∞ (Pre-Law). Physics always wins.

@@ -74,4 +74,4 @@ This document provides a canonical walkthrough of a critical incident lifecycle 
 ## Jurisprudence Motto
 > *"This system does not judge bad decisions; it judges bad intentions."*
 >
-> — *Sopcos Protocol Foundation*
+> - *Sopcos Protocol Foundation*

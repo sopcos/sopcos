@@ -3,7 +3,7 @@
 | Metadata | Value |
 | :--- | :--- |
 | **SIP** | 002 |
-| **Title** | Sopcos Governance, Roles & Licensing Strategy |
+| **Title** | Sopcos Governance, Roles & Licensing |
 | **Status** | LIVING STANDARD (REVISED - VAULT READY) |
 | **Type** | Process / Governance |
 | **Author** | Maestro & Nexus (The Foundation) |
@@ -16,7 +16,7 @@
 ## 1. Abstract
 This proposal defines the governance structure, participation roles, and licensing strategy for the Sopcos Ecosystem. It establishes a model of **"Controlled Freedom,"** designed to balance Open Source innovation with industrial-grade reliability and legal accountability.
 
-The goal is to prevent fragmentation and ensure that while the code remains free, the **"Legitimacy"** and **"Trust"** of the network remain secured by The Foundation.
+The goal is to prevent fragmentation and ensure that while the code remains free,  the **"Legitimacy"** and **"Trust"** of the ecosystem remain secured by The Foundation.
 
 ## 2. Governance & Roles
 
@@ -33,11 +33,11 @@ The "Kernel" includes the following **IMMUTABLE** components. Modifying these lo
 
 1.  **SPL Parser:** Logic for interpreting SIP-001 policy syntax.
 2.  **Decision Engine:** The deterministic evaluation logic (SIP-010 Algebra).
-3.  **Audit Commit Logic:** The mechanism for hashing and committing decisions to the Sopcos Chain (L1) via the Axon (L2) protocol.
+3.  **Audit Commit Logic:** The mechanism for hashing and committing decisions to the Sopcos Core Ledger (L1) via the Axon protocol.
 4.  **Cryptographic Primitives:** Implementation of Ed25519 signatures and AES-GCM (SIP-009 Encryption).
 5.  **Deterministic Simulation Engine:** The logic producing "Proof of Foreknowledge" (SIP-005).
 6.  **Artifact Resolution Logic (New):** The specific routine defined in **SIP-014** for resolving URNs to Vault paths and verifying SHA-256 integrity before execution. A node explicitly **CANNOT** load code from arbitrary URLs.
-7.  **Industrial Asset Engine:** The native logic handling OpCodes 40-49 (SIP-016). It manages the creation, ownership transfer, and burning of Industrial NFTs. This logic MUST be deterministic and validated by all nodes. A failure in asset logic constitutes a consensus failure.
+7.  **Industrial Asset Engine:** The native logic handling OpCodes 40-49 (SIP-016).  It manages the creation, ownership transfer, and burning of Industrial NFTs as ledger-recorded assets. This logic MUST be deterministic and validated by all nodes. A failure in asset logic constitutes a ledger consensus failure.
 
 * **The Evolution Clause:** The Kernel can **ONLY** be updated or patched through the official SIP process managed by The Foundation. Modifications outside this process result in the immediate loss of "Sopcos Compliant" status.
 
@@ -47,7 +47,7 @@ Policy Authors define logic but do not write code. To mitigate human error and i
 * **Role Definition:** A Policy Author is an administrator, engineer, or committee designing the rules. They are distinct from "Operators" (Field Personnel defined in SIP-006 who perform manual Overrides).
 * **Signature Requirement:** All SPL policies generated via GUI/DSL must be digitally signed according to the Authority Hierarchy defined in SIP-008.
     * *Example:* Regulatory Policies (LVL 1) require Multi-Sig (Four-Eyes Principle).
-* **Enforcement:** Synapse nodes will reject any policy that does not meet the signature threshold of its declared Authority Level.
+**Enforcement:** Synapse nodes will reject any policy artifact that does not meet the signature threshold of its declared Authority Level.
 
 ### 2.4. Operational Role Mapping (RBAC)
 While the protocol identifies entities via DID/Public Keys, operational contexts require specific role attributes.
@@ -72,16 +72,16 @@ Certification is treated as a living mechanism.
 * **Time-Bound:** "Certified Node Keys" are issued with an expiration date.
 * **Revocation (CRL):** The Foundation maintains a Certificate Revocation List (CRL). If a node ignores a SIP-014 Revocation Order, its certificate is revoked immediately.
 
-### 4.2. Canonical Sopcos Chain (Root of Legal Truth)
-* **Definition:** "Canonical Sopcos Chain" is the main L1 ledger recognized by The Foundation.
-* **Legal Standing:** In the event of industrial disputes, audits, or insurance claims, only records found on the Canonical Axon are considered "Legal Truth."
+### 4.2. Canonical Sopcos Core Ledger (Root of Legal Truth)
+* **Definition:** "Canonical Sopcos Core Ledger" is the main L1 ledger recognized by The Foundation.
+* **Legal Standing:** In the event of industrial disputes, audits, or insurance claims, only records found on the Canonical Core Ledger are considered "Legal Truth."
 
 ## 5. Threat Mitigation (The Hostile Takeover Defense)
 **Scenario:** Can a hostile entity fork the code and take over the ecosystem?
 **Defense:**
 1.  **Code:** They can fork the code (Open Source).
 2.  **Brand:** They cannot use the "Sopcos" name (Trademark).
-3.  **Trust:** They cannot issue valid certificates (Root of Trust).
+3.  **Trust:** They cannot issue valid certificates recorded on the Core Ledger (Root of Trust).
 4.  **Adoption:** Without valid certificates, their nodes are rejected by industry-standard systems.
 
 **Conclusion:** The Foundation retains a **"Monopoly on Legitimacy,"** ensuring the ecosystem's integrity remains intact even if the code is copied.

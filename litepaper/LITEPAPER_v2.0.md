@@ -21,7 +21,7 @@ SOPCOS completes the missing piece: **liability**.
 
 ---
 
-## 1. The Concept — Why SOPCOS?
+## 1. The Concept - Why SOPCOS?
 
 Current industrial systems focus on **data**.  
 SOPCOS focuses on the **verdict**.
@@ -43,21 +43,21 @@ The core thesis of SOPCOS is simple:
 #### 1.1 The Ring Logic (Hierarchy of Reality)
 SOPCOS applies a Ring Protection Model to industrial decision-making:
 - **Ring 0 (Level ∞): PHYSICS (Pre-Law).** Hard-coded firmware and physical limits. Cannot be overriden. 
-- **Ring 1 (Level 1-2): CONSTITUTION.** SPL policies (Regulatory/Site). Law made executable. 
+- **Ring 1 (Level 1-2): CONSTITUTION.** SPL policies (Regulatory/Site). Law made enforceable. 
 - **Ring 2 (Level 3): OPERATOR.** Human will and judgment. Sovereignty over software. 
 - **Ring 3 (Level 4-5): INTELLIGENCE.** AI, optimization, analytics. Always overridable. 
 
 
 ---
 
-## 2. The Architecture — An Ecosystem, Not a Monolith
+## 2. The Architecture - An Ecosystem, Not a Monolith
 
 SOPCOS is not a single software product.  
 It is an organism with distinct, constrained components.
 
 ---
 
-### 🔌 2.1 SYNAPSE — The Reflex (Hot Path)
+### 🔌 2.1 SYNAPSE - The Reflex (Hot Path)
 
 **“The hands and reflexes of the system.”**
 
@@ -73,7 +73,7 @@ The edge component that directly interfaces with machines.
 
 ---
 
-##### 🧠 2.2 AXON (L2) — The Cognition (Cold Path)
+##### 🧠 2.2 AXON - The Cognition (Cold Path)
 
 **“The reasoning capability of the system.”**
 * **Bicameral Mind:** Decision (Synapse) is separated from cognition (Axon).
@@ -86,19 +86,18 @@ It never authorizes.
 
 ---
 
- ##### 🏛️ 2.3 SOPCOS CHAIN (L1) — The Immutable Record
+ ##### 🏛️ 2.3 CORE LEDGER (L1) - The Immutable Record
 
 **“The memory and notary of the system.”**
-
 - Does not decide  
 - Does not judge  
 - Only **proves**
 
-**Vault Protocol (SIP-014):** Artifacts (WASM, Manifests) are stored in WORM (Write Once, Read Many) compliant vaults. The chain holds the truth; the vault holds the weight. 
+**Vault Protocol (SIP-014):** Artifacts (WASM, Manifests) are stored in WORM (Write Once, Read Many) compliant vaults. The Core Ledger holds the truth; the vault holds the weight.
 
 ---
 
-### 🆔 2.4 IDAS — Industrial Digital Assets
+### 🆔 2.4 IDAS - Industrial Digital Assets
 
 **Industrial NFTs (IDAS):** Machines and AI models are unique, transferable digital twins with verifiable provenance and service history. 
 
@@ -109,9 +108,9 @@ Unauthorized components cannot silently enter the system.
 
 ---
 
-## 3. The Workflow — Hot Path vs Cold Path
+## 3. The Workflow - Hot Path vs Cold Path
 
-### 🔥 Scenario 1 — Imminent Danger
+### 🔥 Scenario 1 - Imminent Danger
 
 - **Event:** Boiler pressure reaches 150 bar (limit: 140).
 - **Synapse:** Reflex engages. AI is bypassed.
@@ -120,7 +119,7 @@ Unauthorized components cannot silently enter the system.
 
 ---
 
-### ❄️ Scenario 2 — Predictive Insight
+### ❄️ Scenario 2 - Predictive Insight
 
 - **Event:** Pressure normal, abnormal vibration detected.
 - **Axon:** Analyzes historical patterns.
@@ -129,7 +128,7 @@ Unauthorized components cannot silently enter the system.
 
 ---
 
-## 4. The Guarantee — Trust & Liability
+## 4. The Guarantee - Trust & Liability
 
 SOPCOS provides a **legal security envelope**, not just technology.
 
@@ -148,5 +147,15 @@ SOPCOS moves AI and distributed ledgers beyond hype and into **industrial-grade 
 We are not making machines smarter.  
 We are making **decisions accountable**.
 
-**SOPCOS — Trust, Executed.**
+**SOPCOS - Trust, Enforced.**
+
+### What SOPCOS Is Not
+- SOPCOS is **not** a smart contract platform.
+- SOPCOS is **not** an AI decision-making system.
+- SOPCOS does **not** automate responsibility.
+- The Core Ledger does **not** execute logic or policies.
+
+All enforcement is deterministic and bounded (Synapse).  
+All authority is explicit and signed (Human / VINCI).  
+All AI output is advisory, never binding (Axon).
  

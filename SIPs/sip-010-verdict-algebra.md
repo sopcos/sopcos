@@ -11,7 +11,7 @@
 | **Related** | SIP-008, SIP-009, SIP-003, SIP-011 |
 
 ## 1. Abstract
-This specification defines the deterministic mathematical rules for resolving multiple **Policy Verdicts** into a single **Final Verdict**. It defines how multiple, simultaneous verdicts—originating from different authorities, scopes, and times—are composed into a single enforceable outcome.
+This specification defines the deterministic mathematical rules for resolving multiple **Policy Verdicts** into a single **Final Verdict**. It defines how multiple, simultaneous verdicts-originating from different authorities, scopes, and times-are composed into a single enforceable outcome.
 
 SIP-010 eliminates:
 * Arbitrary priority integers.
