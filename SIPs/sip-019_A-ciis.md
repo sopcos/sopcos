@@ -1,6 +1,6 @@
 ---
 sip: 019-A
-title: Canonical Industrial Incident Scenario — Boiler Override Profile
+title: Canonical Industrial Incident Scenario - Boiler Override Profile
 status: Draft
 type: Informational / Reference Standard
 layer: Cross-Layer
@@ -43,7 +43,7 @@ All behavior described herein is derived from existing SOPCOS Improvement Propos
 
 ---
 
-## 2. Initial State — Normal Operation (Clean State)
+## 2. Initial State - Normal Operation (Clean State)
 
 A high-pressure industrial boiler operates under SOPCOS governance.
 
@@ -68,7 +68,7 @@ All relevant artifacts (policies, manifests, models) are referenced by hash.
 
 ---
 
-## 3. Predictive Signal — Axon Analysis (Cold Path)
+## 3. Predictive Signal - Axon Analysis (Cold Path)
 
 Over time, Axon observes:
 - increasing micro-vibration,
@@ -89,7 +89,7 @@ Axon output constitutes *foreknowledge*, not authority.
 
 ---
 
-## 4. Safety Intervention — Synapse Enforcement (Hot Path)
+## 4. Safety Intervention - Synapse Enforcement (Hot Path)
 
 Shortly thereafter, real-time boiler pressure exceeds the deterministic threshold defined in the active policy envelope.
 
@@ -106,7 +106,7 @@ The Core Ledger records *that* an intervention occurred, not *whether the outcom
 
 ---
 
-## 5. Human Override — Vinci Intervention (Dirty State)
+## 5. Human Override - Vinci Intervention (Dirty State)
 
 An on-site operator observes contextual factors not visible to sensors (e.g., external fire risk, structural obstruction, evacuation dynamics).
 
@@ -116,7 +116,7 @@ Using the **Vinci Wallet**, the operator is required to select a **Justification
 
 In this scenario, the operator selects:
 
-**CLASS_C — Continuity Override**  
+**CLASS_C - Continuity Override**  
 (to prevent catastrophic production loss)
 
 The operator cryptographically signs:
@@ -142,7 +142,7 @@ Had the operator attempted to exceed absolute physical constraints (e.g., materi
 
 ---
 
-## 6. Forensic Mode — Black Box Protocol
+## 6. Forensic Mode - Black Box Protocol
 
 Upon execution of `OP_CONFESSION (0x11)`,
 the system immediately enters **Forensic Mode** as defined in **SIP-006**.
