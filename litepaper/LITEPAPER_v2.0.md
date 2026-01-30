@@ -97,14 +97,11 @@ It never authorizes.
 
 ---
 
-### 🆔 2.4 IDAS - Industrial Digital Assets
-
-**Industrial NFTs (IDAS):** Machines and AI models are unique, transferable digital twins with verifiable provenance and service history. 
-
-- Ownership
-- Maintenance history
-- Authority and licensing constraints
-Unauthorized components cannot silently enter the system.
+##### 🆔 2.4 ASSETS - IDAS & SIC
+**Total Asset Management:** Sopcos manages both identity and quantity via dual standards.
+* **IDAS (SIP-016):** Unique identity for machines and AI models (Digital Twins). Provable service history and ownership.
+* **SIC (SIP-020):** Divisible industrial commodities. Energy credits, carbon offsets, and raw material inventory managed on-chain.
+Unauthorized components or unverified resources cannot silently enter the system.
 
 ---
 

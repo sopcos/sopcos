@@ -38,7 +38,7 @@ The "Kernel" includes the following **IMMUTABLE** components. Modifying these lo
 5.  **Deterministic Simulation Engine:** The logic producing "Proof of Foreknowledge" (SIP-005).
 6.  **Artifact Resolution Logic (New):** The specific routine defined in **SIP-014** for resolving URNs to Vault paths and verifying SHA-256 integrity before execution. A node explicitly **CANNOT** load code from arbitrary URLs.
 7.  **Industrial Asset Engine:** The native logic handling OpCodes 40-49 (SIP-016).  It manages the creation, ownership transfer, and burning of Industrial NFTs as ledger-recorded assets. This logic MUST be deterministic and validated by all nodes. A failure in asset logic constitutes a ledger consensus failure.
-
+8. **Industrial Commodity Engine (SIC):** The native logic handling OpCodes 60-69 (SIP-020) for fungible, divisible assets. This logic manages balances, minting, and burning mechanics. A failure in accounting logic constitutes a ledger consensus failure.
 * **The Evolution Clause:** The Kernel can **ONLY** be updated or patched through the official SIP process managed by The Foundation. Modifications outside this process result in the immediate loss of "Sopcos Compliant" status.
 
 ### 2.3. Policy Authors & Oversight (Signature Requirements)
@@ -51,8 +51,8 @@ Policy Authors define logic but do not write code. To mitigate human error and i
 
 ### 2.4. Operational Role Mapping (RBAC)
 While the protocol identifies entities via DID/Public Keys, operational contexts require specific role attributes.
-* **Mapping:** The Foundation or the local Enterprise Admin **MUST** sign a "Role Verifiable Credential" linking a specific DID to a human-readable role (e.g., "CISO", "Metrologist", "HSE Officer").
-* **Verification:** Synapse checks this credential before allowing actions restricted to specific roles.
+*   **Mapping:** The Foundation or the local Enterprise Admin **MUST** sign a "Role Verifiable Credential" linking a specific DID to a human-readable role (e.g., "CISO", "Metrologist", "HSE Officer").
+*   **Verification:** Synapse resolves these attributes via the **Identity Ledger interface defined in SIP-021**. This replaces static ACLs with dynamic attribute resolution (ABAC).
 
 ## 3. Licensing Strategy: "Network Copyleft"
 To protect the ecosystem from proprietary forks while encouraging enterprise adoption, a Dual-Licensing Model is adopted.

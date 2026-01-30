@@ -72,10 +72,18 @@ Critical security and responsibility operations are processed as native instruct
 | Hex | Mnemonic | Description |
 | :--- | :--- | :--- |
 | `0x50` | **OP_ARTIFACT_REG** | Registers a file stored in a WORM-compliant **Vault**. Anchors the content hash. |
-| `0x52` | **OP_ARTIFACT_REVOKE**| Legally invalidates a policy or model ("Hukuki Ölüm"). |
+| `0x52` | **OP_ARTIFACT_REVOKE**| Legally invalidates a policy or model ("Legal Nullification"). |
 | `0x53` | **OP_ARTIFACT_SUPER** | Links a new version to an old one, maintaining **forensic continuity** (Supersede). |
 
-### E. Messaging - Red Phone (0x90 - 0x9F)
+##### E. Industrial Commodities - SIC (0x60 - 0x6F)
+| Hex | Mnemonic | Description |
+| ------ | ------ | ------ |
+| 0x60 | **OP_DEFINE_CLASS** | Defines a new Asset Class (Commodity) or Collection Root. |
+| 0x61 | **OP_MINT_COMMODITY** | Increases the supply of a fungible commodity (e.g. Energy Credits). |
+| 0x62 | **OP_TRANSFER_SIC** | Transfers commodity balance between DIDs. |
+| 0x63 | **OP_BURN_COMMODITY** | Permanently removes commodity units from circulation (Retirement). |
+
+### F. Messaging - Red Phone (0x90 - 0x9F)
 | Hex | Mnemonic | Description |
 | :--- | :--- | :--- |
 | `0x90` | **OP_MESSAGE** | Enables encrypted, hybrid messaging for sensitive alerts (SIP-017). |

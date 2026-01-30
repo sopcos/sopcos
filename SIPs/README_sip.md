@@ -74,6 +74,8 @@ If it is not ratified here, it is not law.
 | SIP | Title | Status | Layer |
 |----|------|--------|-------|
 | **SIP-016** | Industrial Digital Assets (IDAS) | **DRAFT** | Core / Assets |
+| **SIP-020** | Standard Industrial Commodities (SIC) | **DRAFT** | Core / Assets |
+| **SIP-021** | Organizational Access Control (ABAC) | **DRAFT** | Core / Gateway |
 | **SIP-017** | Secure M2M Messaging (S-M2M) | **PROPOSED STANDARD** | Networking / Privacy |
 
 ---

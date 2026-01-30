@@ -13,7 +13,13 @@
 
 ## Abstract
 
-This proposal introduces a native **Industrial Non-Fungible Token (NFT)** standard on the Sopcos Blockchain. Unlike traditional art-centric NFTs, this standard is engineered specifically for **Industrial IoT (IIoT)** use cases. It provides a protocol for managing the digital lifecycle of physical machinery (Digital Twins), certifying Artificial Intelligence models (Model Provenance), and securing immutable maintenance logs (Service History) using native, high-performance OpCodes.
+This proposal introduces a native **Industrial Non-Fungible Token (NFT)** standard on the Sopcos Blockchain, strictly for **Unique Assets (IDAS)**.
+
+Unlike traditional art-centric NFTs, this standard is engineered specifically for **Industrial IoT (IIoT)** use cases. It provides a protocol for managing the digital lifecycle of physical machinery (Digital Twins), certifying Artificial Intelligence models (Model Provenance), and securing immutable maintenance logs (Service History).
+
+**Note on Ownership (SIP-021):** With the introduction of the ABAC model, the `owner_did` field of an asset SHOULD resolve to an **Organization DID** (e.g., `did:sop:acorp-hq`) rather than an individual operator. Operational access is derived dynamically via attributes.
+
+**SIP-020 (Standard Industrial Commodities)**.
 
 ## Motivation
 
