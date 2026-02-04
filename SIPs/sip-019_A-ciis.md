@@ -1,211 +1,187 @@
----
-sip: 019-A
-title: Canonical Industrial Incident Scenario - Boiler Override Profile
-status: Draft
-type: Informational / Reference Standard
-layer: Cross-Layer
-author: Sopcos Foundation
-created: 2026-01-18
-related-sips:
-  - SIP-001
-  - SIP-005
-  - SIP-006
-  - SIP-008
-  - SIP-011
-  - SIP-013
-  - SIP-014
-  - SIP-016
-  - SIP-017
-  - SIP-018
----
-
-# SIP-019-A: Canonical Industrial Incident Scenario  
-## Boiler Override Profile
-
-> **Safety is enforced by physics.  
-> Responsibility is enforced by record.**
-
----
-
-## 1. Purpose and Scope
-
-This document defines **Profile A** of the SIP-019 Scenario Standards family.
-
-It provides a **canonical, end-to-end reference scenario** demonstrating how SOPCOS components interact during a real industrial incident involving:
-
-- automated safety enforcement,
-- predictive analysis,
-- explicit human override,
-- and post-incident forensic liability attribution.
-
-This SIP introduces **no new protocol rules**.  
-All behavior described herein is derived from existing SOPCOS Improvement Proposals.
-
----
-
-## 2. Initial State - Normal Operation (Clean State)
-
-A high-pressure industrial boiler operates under SOPCOS governance.
-
-The boiler is registered as an **Industrial Digital Asset (IDAS)** under **SIP-016** and possesses:
-- a persistent Decentralized Identifier (DID),
-- a verified maintenance and ownership history,
-- and an active policy envelope defined via **SIP-001**.
-
-A **Synapse** node is deployed at the edge, enforcing deterministic safety limits in real time.
-
-An **Axon** node is connected in cold-path mode for analysis and forecasting only.
-Axon has no execution authority.
-
-The system operates with an active **Telemetry Binding Manifest**
-as defined in **SIP-013**, stored immutably in a **WORM-compliant Vault (SIP-014)**, attesting to:
-- sensor calibration,
-- physical installation integrity,
-- and reality binding of incoming telemetry.
-
-The **Core Ledger (L1)** reflects a **Clean State** for the asset.
-All relevant artifacts (policies, manifests, models) are referenced by hash.
-
----
-
-## 3. Predictive Signal - Axon Analysis (Cold Path)
-
-Over time, Axon observes:
-- increasing micro-vibration,
-- anomalous acoustic resonance,
-- and deviation from historical operating baselines.
-
-Using **SIP-005 simulation semantics**, Axon projects an elevated failure risk within an upcoming operational window.
-
-Axon does **not**:
-- issue commands,
-- alter system state,
-- or interact with actuators.
-
-A confidential foreknowledge alert is transmitted to the factory administrator via **SIP-017 (Red Phone)**.
-
-**Normative Note:**  
-Axon output constitutes *foreknowledge*, not authority.
-
----
-
-## 4. Safety Intervention - Synapse Enforcement (Hot Path)
-
-Shortly thereafter, real-time boiler pressure exceeds the deterministic threshold defined in the active policy envelope.
-
-**Synapse** engages reflexively under **Pre-Law constraints**.
-
-A physical mitigation action (e.g., pressure relief valve activation) is executed within milliseconds.
-
-Synapse emits an automated verdict and anchors it on the **Core Ledger** via `OP_LOG_VERDICT (0x10)`.
-
-The system remains in **Clean State**.
-
-**Normative Note:**  
-The Core Ledger records *that* an intervention occurred, not *whether the outcome was optimal*.
-
----
-
-## 5. Human Override - Vinci Intervention (Dirty State)
-
-An on-site operator observes contextual factors not visible to sensors (e.g., external fire risk, structural obstruction, evacuation dynamics).
-
-The operator decides to override the automated safety action.
-
-Using the **Vinci Wallet**, the operator is required to select a **Justification Code** as defined in **SIP-006**.
-
-In this scenario, the operator selects:
-
-**CLASS_C - Continuity Override**  
-(to prevent catastrophic production loss)
-
-The operator cryptographically signs:
-- the override request,
-- the selected justification,
-- and explicit acceptance of liability.
-
-The override is anchored on the Core Ledger via `OP_CONFESSION (0x11)`.
-
-Immediate consequences:
-- The system enters **Dirty State**.
-- Operational authority shifts from automated enforcement to human mandate.
-- Legal liability is cryptographically transferred to the signing identity.
-
-**Normative Note:**  
-Override is permitted, but **never silent**.
-
-### Pre-Law Boundary Condition
-
-The human override remains strictly constrained by **Pre-Law (Level ∞)** physical limits as defined in **SIP-011**.
-
-Had the operator attempted to exceed absolute physical constraints (e.g., material melting point), the system would have rejected the command due to **physical impossibility**, regardless of human mandate.
-
----
-
-## 6. Forensic Mode - Black Box Protocol
-
-Upon execution of `OP_CONFESSION (0x11)`,
-the system immediately enters **Forensic Mode** as defined in **SIP-006**.
-
-A cryptographic **Forensic Snapshot** is created, sealing:
-- sensor data hashes,
-- policy references,
-- telemetry manifests,
-- and system state context.
-
-This snapshot activates the **Black Box Protocol** and is immutably anchored on the Core Ledger.
-
-This mechanism prevents post-incident claims such as “the sensors were unreliable” or “the data was altered after the fact.”
-
----
-
-## 7. Incident Resolution & Evidence Preservation
-
-The incident concludes (with or without physical damage).
-
-All relevant evidence is preserved:
-- raw telemetry and logs in a **WORM Vault (SIP-014)**,
-- policies, models, and manifests by cryptographic reference,
-- event ordering sealed by the **Core Ledger**.
-
-An **Incident Evidence Package (IEP)** is assembled per **SAF v1.1**, ensuring that evidence integrity is mathematically enforceable.
-
----
-
-## 8. Audit & State Restoration
-
-A Level 5 Auditor reviews the IEP.
-
-If procedures were followed correctly, the auditor signs a `OP_STATE_RESET (0x12)` transaction.
-
-The system returns to **Clean State**.
-The audit itself becomes part of the immutable record.
-
----
-
-## 9. Normative Derivations
-
-From this scenario, the following interpretations apply:
-
-- **SIP-001:** Policies constrain automation but do not eliminate human agency.
-- **SIP-005:** Foreknowledge removes plausible deniability.
-- **SIP-006:** Override requires explicit justification and liability acceptance.
-- **SIP-011:** No authority may violate physical law.
-- **SIP-013:** Reality binding is required for admissible telemetry.
-- **SIP-017:** Sensitive risk communication need not be publicly disclosed.
-- **SIP-018:** The Core Ledger provides evidence, not judgment.
-- **SAF v1.1:** Liability attribution is derived from cryptographic fact, not testimony.
-
----
-
-## 10. Conclusion
-
-This canonical scenario demonstrates that SOPCOS does not attempt to prevent every industrial incident.
-
-Instead, it ensures that when incidents occur:
-- safety is enforced first,
-- responsibility is explicit,
-- and disputes are resolved through evidence rather than interpretation.
-
-**Trust is not assumed.  
-It is executed.**
+# SIP-019-A: Canonical Industrial Incident Scenario (CIIS v2.1)
+
+| Field | Value |
+| :--- | :--- |
+| **SIP** | 019-A |
+| **Title** | Canonical Industrial Incident Scenario (CIIS) |
+| **Status** | PROPOSED STANDARD|
+| **Type** | Informational / Reference Standard |
+| **Layer** | Cross-Layer (Synapse / Axon / Ledger) |
+| **Author** | Sopcos Core Developers |
+| **Created** | 2026-01-23 |
+| **Requires** | SIP-002, SIP-018, SIP-020, SIP-021 |
+| **Motto** | *"Fast decisions. Slow liability."* |
+
+--------------------------------------------------------------------------------
+**1. Abstract**
+This proposal defines the reference **Safety and Liability Workflow** for industrial automation events within the Sopcos ecosystem. CIIS v2.1 standardizes the following immutable invariant based on the "Smart Unit" architecture:
+**One WASM Runtime + One Declarative Rule Set -> Deterministic Evaluation -> Single Canonical Verdict -> Ledger-Grade Evidence**
+The system enforces a strict separation of duties:
+• **Synapse:** Makes the Decision (Deterministic Adjudicator).
+• **Axon:** Enforces the Action (Neutral Courier / Gateway).
+• **Ledger (L1):** Anchors the Evidence (Policy + Verdict Proof).
+
+**2. Motivation**
+Industrial systems often fail at moments where **the decision occurs faster than responsibility can be assigned**. Traditional SCADA systems answer "What happened?", but remain silent on "Why did it happen, and who was responsible?".
+CIIS is designed to ensure that after any accident, the following questions can be answered with cryptographic certainty:
+ - Which policy was active?
+ - Which exact rule (Rule ID) triggered the action?
+ - Was the decision based on a single data point or a complex correlation (Smart Unit)?
+ - Who intervened (Override), and under what authority?
+
+**3. High-Level Architecture**
+ - **3.1. Component Topology**
+In this scenario, data flows from sensor to action via the following path:
+
+```mermaid
+flowchart LR
+S[Sensor / PLC] --> A[Axon Gateway]
+A --> SY[Synapse WASM Runtime]
+SY --> L[(Core Ledger)]
+SY --> V[Canonical Verdict]
+V --> A
+A --> P[Physical Action / PLC Command]
+```
+ - **3.2. Responsibilities**
+
+|Component  |Responsibility  |
+| :--- | :--- |
+| **Synapse** | Deterministic, isolated decision making (WASM Sandbox). |
+| **Axon** | Policy validation, data routing, and action enforcement. |
+| **Ledger (L1)** | Evidence Anchoring (The Immutable Record). |
+
+**4. Policy Artifact Model (The Smart Unit)**
+CIIS v2.1 separates the policy into "Rule" and "Judge" but governs them under a single **Policy Envelope (OP_ARTIFACT)**.
+ - **4.1. Canonical Rulepack**
+The following "Smart Unit" rules are defined for the `boiler_master_unit`. Note that the first rule is a **Correlation Rule**.
+
+```json
+{
+  "meta": {
+    "author": "did:sop:admin:0x8829102",
+    "version": "2.0",
+    "created_at": "2026-02-04T12:00:00Z"
+  },
+  "target_profile": "boiler_master_unit",
+  "rules": [
+    {
+      "id": "EXPLOSION-RISK-CORRELATED",
+      "condition": "pressure > 100.0 AND vibration > 0.08",
+      "action": "LOCKED",
+      "reason": "CRITICAL_PRESSURE_AND_VIBRATION_MATCH_EXPLOSION_PATTERN",
+      "priority": 100
+    },
+    {
+      "id": "PRESSURE-ABSOLUTE-LIMIT",
+      "condition": "pressure > 120.0",
+      "action": "LOCKED",
+      "reason": "ABSOLUTE_PRESSURE_LIMIT_EXCEEDED",
+      "priority": 90
+    },
+    {
+      "id": "VIBRATION-WARNING",
+      "condition": "vibration > 0.05",
+      "action": "WARNING",
+      "reason": "UNUSUAL_BEARING_WEAR_DETECTED",
+      "priority": 50
+    },
+    {
+      "id": "SYSTEM-NORMAL",
+      "condition": "pressure <= 100.0 AND vibration <= 0.05",
+      "action": "NORMAL",
+      "reason": "ALL_SYSTEMS_NOMINAL",
+      "priority": 1
+    }
+  ]
+}
+```
+ - **4.2. Anchoring Strategy**
+Axon refuses to execute any logic unless the Hash of this Rule Set and the Hash of the corresponding WASM binary are registered on L1 via `OP_ARTIFACT_REG` (0x50).
+
+**5. The Scenario (Execution Script)**
+Phase 1: The Incident (Correlation Trigger)
+**Context:** Boiler pressure reaches `105.0` bar (Above Limit) and vibration reaches `0.09` G (Above Limit).  **Action:** Axon packages this data as "Smart Unit" telemetry and forwards it to Synapse.
+
+```mermaid
+sequenceDiagram
+participant Sensor
+participant Axon
+participant Synapse
+participant Ledger
+participant PLC
+
+Sensor->>Axon: {P:105, V:0.09}
+Axon->>Axon: Canonicalize + Hash
+Axon->>Synapse: Forward canonical telemetry + policy refs
+Synapse->>Synapse: Evaluate (Telemetry + Policy)
+Synapse->>Ledger: OP_LOG_VERDICT {Decision: LOCKED}
+Synapse-->>Axon: Verdict {LOCKED, Reason: EXPLOSION...}
+Axon->>PLC: Enforce Action: SHUTDOWN
+```
+**Synapse Decision (Canonical Verdict):**  Synapse deterministically selects the highest priority rule and produces the following JSON output:
+
+```json
+{
+  "unit_verdict": "LOCKED",
+  "rule_id": "EXPLOSION-RISK-CORRELATED",
+  "reason": "CRITICAL_PRESSURE_AND_VIBRATION_MATCH_EXPLOSION_PATTERN",
+  "priority": 100,
+  "sub_verdicts": [
+      {"signal": "pressure", "value": 105.0, "status": "FAIL"},
+      {"signal": "vibration", "value": 0.09, "status": "FAIL"}
+  ]
+}
+```
+Phase 2: The Human Override (Liability Transfer)
+**Context:** The system has transitioned to `LOCKED` state, halting production. The Operator believes the situation is under control and wishes to resume production (Continuity).
+**Action:** The Operator initiates an **Override** via the Vinci Wallet.
+
+```mermaid
+sequenceDiagram
+participant Operator
+participant Axon
+participant Ledger
+participant Synapse
+
+Operator->>Axon: Override Request (Justification: CLASS_C)
+Axon->>Ledger: Verify Identity (SIP-021: Org/Role)
+Axon->>Ledger: OP_CONFESSION (0x11)
+Ledger-->>Axon: Transaction Confirmed
+Axon->>Synapse: Force State: MANUAL_ALLOW
+Synapse->>Synapse: Enter DIRTY_STATE
+```
+
+**Ledger Record (OP_CONFESSION):**  This transaction transfers liability from the machine to the human.
+• **Signer:**  `did:sop:operator:ali`
+• **Justification:**  `CLASS_C` (Economic Continuity)
+• **Target:**  `did:sop:boiler-01`
+
+Phase 3: The Audit (Forensic Reproducibility)
+After the event, an Auditor questions the validity of the decision.  **Method:** External logs are untrusted. The Auditor retrieves `Policy Hash`, `Rulepack Hash`, and `Telemetry Hash` from L1. They run the Synapse WASM in their own isolated environment.
+**Result:** The Auditor's simulation produces the exact same `LOCKED` decision with the same `EXPLOSION-RISK-CORRELATED` rule ID. **The system is innocent.**
+
+**6. State Model (The Lifecycle)**
+The states the system passes through during the incident are as follows:
+
+```mermaid
+stateDiagram-v2
+
+[*] --> Clean
+
+Clean --> Locked: Synapse verdict
+Locked --> Dirty: Human override
+Dirty --> Audit: Investigation
+Audit --> Clean: OP_STATE_RESET
+
+```
+**7. Security & Liability Guarantees**
+This scenario proves the fundamental promises of Sopcos:
+1. **Correlation Power:** The system reacted not just to single values, but to their compound risk (Pressure + Vibration).
+2. **Accountability:** The operator did not "hack" the system; they assumed responsibility using their authority (`OP_CONFESSION`).
+3. **Non-Repudiation:** The decision is mathematically absolute, backed by signed WASM and signed Rule Sets.
+
+**8. Final Principle**
+**Synapse decides fast.**  **Ledger remembers forever.**  **Humans answer later.**
+
+--------------------------------------------------------------------------------
+*Copyright © 2026 Sopcos Protocol Foundation. All Rights Reserved.*
