@@ -181,6 +181,7 @@ This scenario proves the fundamental promises of Sopcos:
 3. **Non-Repudiation:** The decision is mathematically absolute, backed by signed WASM and signed Rule Sets.
 
 **8. Final Principle**
+
 **Synapse decides fast. Ledger remembers forever. Humans answer later.**
 
 --------------------------------------------------------------------------------
