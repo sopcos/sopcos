@@ -95,11 +95,18 @@ The WASM module **MUST NOT** import any functions except the **Sopcos Host Funct
 
 **Prohibited:** Network access, File I/O, Random Number Generation, System Clock (Time must be injected via Context).
 
-### 6.3. Resource Metering (Gas)
+#### 6.3. Resource Metering (Gas)
 To prevent infinite loops, the Runtime **MUST** enforce strict instruction metering. If execution exceeds the limit, the Verdict defaults to **DENY (Fail-Safe)**.
 
+#### 6.4. Extended Verdict Interface (Smart Unit ABI)
+To support Composite Verdicts (SIP-019), WASM modules **MAY** export the following functions to provide rich out-of-band data (JSON/CBOR) beyond the standard scalar verdict:
+*   `verdict_ptr() -> uint32`: Returns the memory offset of the detailed result blob within the WASM linear memory.
+*   `verdict_len() -> uint32`: Returns the length of the result blob.
+
+The Runtime **MUST** read this memory region after execution to capture `sub_verdicts` (atomic checks) and `derived_verdicts` (correlations) for the audit log, while preserving the scalar return of `evaluate()` for SIP-010 Algebra.
+
 ## 7. Authority Resolution
-The WASM binary does not contain the Authority Level. Authority is a property of the **Signer**. The runtime extracts the `kid` (Key ID) from the header and resolves the Authority Level from the L1 Registry as defined in SIP-008.
+The WASM binary does not contain the Authority Level. Authority is a property of the **Signer**. The runtime extracts the kid (Key ID) from the header and resolves the Authority Level from the L1 Registry as defined in SIP-008.
 
 ## 8. Delivery & Execution Model
 1.  **Axon:** Verifies the Signature and checks the L1 Registry for `OP_ARTIFACT_REVOKE` or `OP_ARTIFACT_SUPERSEDE` status.

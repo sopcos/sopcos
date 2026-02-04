@@ -24,11 +24,18 @@ For a data block to be considered a valid "Sopcos Decision" and committed to Axo
 ### 2.1. Anatomy of a Valid Decision (Composition Schema)
 The Decision Object is a hybrid structure acting as a container for either Algorithmic Logic or Human Liability. Any decision lacking these fields or failing cryptographic verification is considered **"NULL AND VOID."**
 
-#### Verdict Vectors (Extended per SIP-010):
-* **ALLOW:** Operation authorized.
-* **DENY:** Operation strictly forbidden.
-* **WARN:** Operation authorized (ALLOW logic) but flagged with specific risk codes. Liability shifts to the operator/system acknowledging the warning.
-* **HALT:** Immediate cessation of operations requiring manual reset (Panic/Kill Switch).
+##### Verdict Vectors (Extended per SIP-010):
+*   **ALLOW:** Operation authorized.
+*   **DENY:** Operation strictly forbidden.
+*   **WARN:** Operation authorized (ALLOW logic) but flagged with specific risk codes. Liability shifts to the operator/system acknowledging the warning.
+*   **HALT:** Immediate cessation of operations requiring manual reset (Panic/Kill Switch).
+
+##### Extended Proof Metadata (Composite Verdicts)
+For "Smart Unit" policies returning complex decisions via the SIP-009 Extended Interface, the decision object **MAY** include:
+*   `composite_proof`: A structured object containing:
+    *   `sub_verdicts`: List of atomic signal checks (e.g., {"signal": "pressure", "verdict": "DENY"}).
+    *   `derived_verdicts`: List of multi-signal correlations (e.g., {"name": "burst_risk", "dependencies": ["pressure", "vibration"]}).
+*   `unit_verdict`: The summarized scalar result used for SIP-010 Algebra.
 
 ```json
 // EXTENSION (v1.2): Cognitive Provenance

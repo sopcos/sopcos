@@ -67,8 +67,9 @@ SPL uses a context-aware condition model to ensure determinism.
 }
 ```
 
-* **Trigger:** Defines *when* the policy is evaluated (e.g., `TELEMETRY`, `INCOMING_TX`).
-* **Context:** Explicitly defines the data source (e.g., `LAST_TELEMETRY` vs `BATCH_AVG`).
+*  **Trigger:** Defines *when* the policy is evaluated (e.g., TELEMETRY, INCOMING_TX).
+*  **Context:** Explicitly defines the data source (e.g., LAST_TELEMETRY vs BATCH_AVG).
+*  **Scope:** Policies may target individual sensors OR aggregate units (Smart Units). In unit-scoped policies, the input context includes the full telemetry map of the asset.
 
 ### 3.5. Conflict Resolution Logic (Revised)
 *(Completely Revised to comply with SIP-010)*
