@@ -16,7 +16,7 @@
 
 This proposal defines a native standard for managing fungible, divisible, and countable industrial assets on the Sopcos Core Ledger.
 
-Assets traditionally referred to as "tokens" in general-purpose blockchains are redefined here as **Standard Industrial Commodities (SIC)**. This standard represents measurable industrial units—such as energy credits, carbon offsets, raw material inventories, and machine operating hours—that serve to answer the question *"How much?"* rather than *"Which one?"*.
+Assets traditionally referred to as "tokens" in general-purpose blockchains are redefined here as **Standard Industrial Commodities (SIC)**. This standard represents measurable industrial units-such as energy credits, carbon offsets, raw material inventories, and machine operating hours-that serve to answer the question *"How much?"* rather than *"Which one?"*.
 
 SIC complements **SIP-016 (IDAS)**, creating a bipartite asset architecture:
 * **SIP-016 (IDAS):** Manages unique identities (Machines, Models, Licenses).
