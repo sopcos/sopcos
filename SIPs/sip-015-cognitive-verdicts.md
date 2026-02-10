@@ -4,10 +4,11 @@
 | :--- | :--- |
 | **SIP** | 015 |
 | **Title** | Cognitive Verdicts & Agentic Consensus |
-| **Status** | **PROPOSED STANDARD** |
+| **Status** | **PROPOSED STANDARD (REVISED - CHRONOS READY)** |
 | **Type** | Standards Track (Core) |
 | **Author** | Sopcos Core Architects (Maestro & Codex) |
 | **Created** | 2026-01-07 |
+| **Last Revised** | 2026-02-12 |
 | **Layer** | L2 (Axon Protocol) |
 | **Requires** | SIP-012, SIP-013, SIP-014 |
 | **Motto** | "Intelligence is Probabilistic; Liability is Deterministic." |
@@ -20,15 +21,19 @@ This standard defines the processes for data generation, risk analysis, and deci
 
 The AI observes the physical world and generates **probabilistic** recommendations; however, the execution of these recommendations is subject to **Deterministic Policy (SIP-001)** rules and **Human Mandate (SIP-012)**.
 
+**Revision Note (v1.1):** This update introduces **Temporal Semantics (Chronos Class)**, enabling AI agents to issue predictive warnings regarding *future* states (e.g., "Failure in 600s") without violating the deterministic safety of the Hot Path.
+(SIP-001)** rules and **Human Mandate (SIP-012)**.
+
 ## 2. Philosophy: The Caged Genius
 
 Industrial systems cannot accept uncertainty (hallucination). Therefore, SIP-015 encloses "AI Autonomy" within a three-layered security cage:
 
 1.  **The Observer is not the Judge:** The machine generates signals, scores, and predictions. **Intent** and **Liability** are born only with a Human signature (or a Mandate signed by a human).
 2.  **Confidence Score:** AI output is never just "DO" or "DON'T". The output is a vector: `Verdict + Confidence Level`. The Chain utilizes this confidence score as a mathematical threshold when taking action.
-3.  **Hierarchical Compliance:**
-    * **Pre-Law (SIP-008):** Physical limits supersede AI recommendations.
-    * **Override (SIP-006):** Human intervention immediately invalidates AI analysis.
+3. **Hierarchical Compliance:**
+    *   **Pre-Law (SIP-008):**  Physical limits supersede AI recommendations.
+    *   **Override (SIP-006):**  Human intervention immediately invalidates AI analysis.
+4. **Non-Binding Guarantee:** Predictive engines **MUST NOT** generate enforceable `VerdictRecords` directly. They **MAY** only emit `RecommendationEnvelopes` to be evaluated by a deterministic SIP-001 Policy.
 
 ## 3. Data Structures
 
@@ -49,35 +54,25 @@ The AI does not look at "raw" data, but at "signed reality" declared via SIP-013
 }
 ```
 
-### 3.2. RiskAssessment (The Thinking)
-This is the machine's "thought bubble." It contains analysis, not judgment.
-
-* **Model Provenance:** The hash of the AI model weights used (e.g., Llama-3) (`model_hash`) must point to a URN registered in the SIP-014 Vault. This provides the forensic answer to "Which brain made this decision?"
+##### 3.2. RiskAssessment (The Thinking - REVISED)
+This is the machine's "thought bubble." It contains analysis, not judgment. Structure updated to support Temporal Semantics:
 
 ```go
 type RiskAssessment struct {
-    AssessmentID string `json:"assessment_id"`
-    ObsID        string `json:"obs_id"`     // REFERENCE: 3.1 ObservationRecord
-    Timestamp    int64  `json:"timestamp"`  // MANDATORY: Time of analysis (Unix Epoch)
-
-    Engine struct {
-        Type      string `json:"type"`       // "LLM", "RAG", "RULE"
-        ModelID   string `json:"model_id"`   // e.g., "llama3-8b-quantized"
-        ModelHash string `json:"model_hash"` // Binary Hash (Which brain?)
-        LicenseTokenID string `json:"license_token_id,omitempty"` // SIP-016 NFT ID (Ownership/Rights)
-    }
+    ModelHash      string  // SIP-014 URN of the Brain
+    RiskScore      float64 // 0.0 to 1.0
+    RiskCategory   string  // e.g., "BEARING_FAIL_PREDICTED"
     
-    PromptHash string `json:"prompt_hash"` // Hash of the prompt used (Replayability)
-
-    RiskVector struct {
-        Severity   float64  `json:"severity"`   // 0.0 - 1.0
-        Confidence float64  `json:"confidence"` // AI Certainty Level
-        Categories []string `json:"categories"` // ["PRESSURE_SPIKE", "OSCILLATION"]
-    }
-
-    Explanation string `json:"explanation"` // Human-readable justification
+    // Temporal Semantics (New in v1.1)
+    Mode           string  // "SNAPSHOT" | "PREDICTIVE"
+    WindowSeconds  int     // Lookback window (e.g., 3600s used for inference)
+    HorizonSeconds int     // Prediction horizon (e.g., "Failure in 600s")
+    
+    Timestamp      int64
 }
 ```
+* **Model Provenance:**  The hash of the AI model weights used (e.g., Llama-3) (model_hash) must point to a URN registered in the SIP-014 Vault.
+
 
 ### 3.3. RecommendationEnvelope (The Offer)
 
@@ -136,9 +131,16 @@ Before generating a `VerdictRecord`, an AI Agent must present `ModelHash` and `P
 
 ### 4.2. Mandate Dependency
 AI agents (Nodes) do not possess "Asset Ownership" on their own. Under SIP-012, an AI cannot function without a valid `MandateToken` signed by a Human Operator (Sovereign).
-* If the Human Operator's authority is revoked (`OP_ARTIFACT_REVOKE`), all AI Agents dependent on it are instantly silenced.
+*  If the Human Operator's authority is revoked (OP_ARTIFACT_REVOKE), all AI Agents dependent on it are instantly silenced.
 
-## 5. Security Restrictions (Red Lines)
+#### 4.3. Predictive Advisory Mode (Chronos Class)
+This section governs agents operating in `mode="PREDICTIVE"`.
+*   **Rule 1 (Policy Evaluation):** A prediction (e.g., "Horizon: 600s") has NO effect unless a SIP-001 policy explicitly subscribes to it.
+*   **Rule 2 (No Bypass):** Predictive alerts **MUST NOT** bypass the Hot Path safety interlocks (SIP-008 Level ∞).
+*   **Rule 3 (Safe Degradation):** If the AI Agent fails, crashes, or disconnects (Heartbeat Loss), the system **MUST** degrade safely to "Dumb Mode" (Standard PID Control) without halting, unless the policy explicitly requires AI for safety.
+*   **Rule 4 (Expiration):** All predictive recommendations **MUST** have a strict TTL. Old predictions are dangerous noise.
+
+#### 5. Security Restrictions (Red Lines)
 The following restrictions are **Hard-Coded** at the protocol level:
 
 1.  **No Wallet Ownership:** AI Agents cannot hold Private Keys capable of fund transfer. They only possess "Data Signing" keys.
@@ -147,26 +149,29 @@ The following restrictions are **Hard-Coded** at the protocol level:
 
 ## 6. Integration with SIP-001 (Policy Language Update)
 New operators have been added to the SIP-001 language to process AI recommendations:
-
-* `axon.recommendation`: The decision recommended by AI (ALLOW/DENY).
-* `axon.confidence`: The confidence score of the AI (Float).
-* `axon.risk_category`: The detected risk label.
-
-**Example Policy:**
-
+*  `axon.recommendation`: The decision recommended by AI (ALLOW/DENY).
+*  `axon.confidence`: The confidence score of the AI (Float).
+*  `axon.risk_category`: The detected risk label.
+*  `axon.risk_score`: The probabilistic confidence of the risk (Float 0.0 - 1.0).
+*  `axon.horizon`: The predicted time-to-failure in seconds (Int).
+*  `axon.mode`: The operation mode ("SNAPSHOT" / "PREDICTIVE").
+**Canonical "Trend-to-Lock" Policy Example:**
 ```json
-"logic": {
-  "IF": {
-    "AND": [
-      { "VAR": "telemetry.temp", "GT": 100 },
-      { "VAR": "axon.recommendation", "EQ": "DENY" },
-      { "VAR": "axon.confidence", "GT": 0.90 }
-    ]
-  },
-  "THEN": "DENY",
-  "ELSE": "WARN"
+{
+  "id": "PREDICTIVE-BEARING-PROTECTION",
+  "condition": "axon.mode == 'PREDICTIVE' AND axon.risk_score > 0.85 AND axon.horizon < 600",
+  "action": "WARN",
+  "reason": "AI_PREDICTS_FAILURE_WITHIN_10_MINUTES",
+  "priority": 50
 }
-```
+
+Logic: If the AI is >85% sure that the bearing will fail within 10 ## 7. Annex: Canonical Incident Generator
+**Normative Requirement:**
+To validate compliance with SIP-015, a reference simulator producing deterministic telemetry and ground-truth labels **MUST** be provided.
+*   **Purpose:** To verify that the "Predictive Engine" correctly triggers the "Policy" within the defined Horizon.
+*   **Principle:** "An AI that cannot be tested against a Ground Truth is not an Industrial Asset; it is a liability."
+minutes, issue a WARN verdict (which may trigger a graceful shutdown sequence via the Controller).
+
 
 ---
 *Copyright © 2026 Sopcos Protocol Foundation. All Rights Reserved.*
