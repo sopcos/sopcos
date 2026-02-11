@@ -155,6 +155,7 @@ New operators have been added to the SIP-001 language to process AI recommendati
 *  `axon.risk_score`: The probabilistic confidence of the risk (Float 0.0 - 1.0).
 *  `axon.horizon`: The predicted time-to-failure in seconds (Int).
 *  `axon.mode`: The operation mode ("SNAPSHOT" / "PREDICTIVE").
+
 **Canonical "Trend-to-Lock" Policy Example:**
 ```json
 {
@@ -164,8 +165,11 @@ New operators have been added to the SIP-001 language to process AI recommendati
   "reason": "AI_PREDICTS_FAILURE_WITHIN_10_MINUTES",
   "priority": 50
 }
+```
 
-Logic: If the AI is >85% sure that the bearing will fail within 10 ## 7. Annex: Canonical Incident Generator
+Logic: If the AI is >85% sure that the bearing will fail within 10 
+
+## 7. Annex: Canonical Incident Generator
 **Normative Requirement:**
 To validate compliance with SIP-015, a reference simulator producing deterministic telemetry and ground-truth labels **MUST** be provided.
 *   **Purpose:** To verify that the "Predictive Engine" correctly triggers the "Policy" within the defined Horizon.
