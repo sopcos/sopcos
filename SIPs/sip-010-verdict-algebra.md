@@ -4,7 +4,7 @@
 | :--- | :--- |
 | **SIP** | 010 |
 | **Title** | The Verdict Algebra (Decision Resolution Logic) |
-| **Status** | LIVING STANDARD (REVISED) |
+| **Status** | LIVING STANDARD (REVISED - DENY SEMANTICS) |
 | **Type** | Standards Track (Core) |
 | **Layer** | Synapse (Runtime) |
 | **Motto** | Decisions are vectors. Conflicts are structural, not exceptional. |
@@ -26,9 +26,63 @@ It replaces them with:
 In any non-trivial Sopcos deployment, a target scope may be subject to multiple simultaneous verdicts. Without a formal algebra, systems revert to fragile heuristics.
 
 SIP-010 establishes a foundational axiom:
-> **"Conflict is not an error state. Conflict is the primary state."**
+**"Conflict is not an error state. Conflict is the primary state."**
 
-## 3. The Verdict Vector
+#### 2.1 Rejection Semantics (Normative)
+This section formally defines the semantic meaning, origin boundary, and algebraic behavior of the DENY decision within the Sopcos Verdict Algebra.
+
+##### 2.1.1 Definition of DENY
+A DENY decision represents a deterministic prohibition vector indicating that a requested action **MUST NOT** be executed within the specified jurisdictional scope and temporal validity.
+Formally: `DENY ≡ δ = 0`
+
+A valid DENY verdict **MUST** exist as a well-formed verdict vector:
+`v = ⟨δ=0, α, σ, τ⟩`
+Where:
+*   `α` defines the authority level
+*   `σ` defines the applicable scope
+*   `τ` defines the temporal validity
+
+A DENY verdict is **not** an error condition. It is a valid and expected algebraic element.
+
+##### 2.1.2 Algebraic Properties of DENY
+Within the Verdict Composition Operator (`⊕`), DENY exhibits the following normative properties:
+1.  **Absorption of ALLOW:** `DENY ⊕ ALLOW = DENY`
+2.  **Absorption of WARN:** `DENY ⊕ WARN = DENY`
+3.  **Dominance under equal authority:**
+    Given: `v₁.α = v₂.α` AND `v₁.δ = DENY` AND `v₂.δ ∈ {ALLOW, WARN}`
+    Then: `v₁ ⊕ v₂ = DENY`
+    *(This guarantees safety monotonicity.)*
+
+##### 2.1.3 Authority-Constrained Dominance
+The dominance of DENY is constrained by authority projection.
+Given two verdict vectors: `v₁ = ⟨DENY, α₁, ...⟩` and `v₂ = ⟨ALLOW, α₂, ...⟩`
+If: `α₂ < α₁` (v₂ is Higher Authority)
+Then: `v₂ dominates v₁`
+
+**Principle:** DENY is algebraically dominant, but not hierarchically absolute.
+
+##### 2.1.4 Vacuum-Induced Denial (Fail-Closed Guarantee)
+If no applicable verdict vectors remain after Validation and Authority Projection (`ValidSet = ∅`), the system **MUST** return: **DENY**.
+This condition is defined as the **Vacuum State**. It ensures the Fail-Closed property: *Absence of permission is equivalent to denial.*
+
+##### 2.1.5 Verdict Origination Boundary (Critical Separation)
+SIP-010 operates exclusively on well-formed verdict vectors. The following conditions do **NOT** produce verdict vectors:
+*   Invalid cryptographic signature
+*   Unauthorized or unregistered identity
+*   Malformed or schema-invalid payload
+*   Replay or stale timestamp outside freshness window
+
+Such conditions result in **absence** of valid verdict vectors, not creation of synthetic DENY vectors. The resulting empty verdict set is resolved via Vacuum-Induced Denial (Section 2.1.4). This separation preserves algebraic integrity and prevents injection of artificial denial vectors.
+
+##### 2.1.6 Logical Denial vs Structural Denial
+DENY may originate from two distinct mechanisms:
+1.  **Logical Denial:** Explicitly produced by policy evaluation logic (e.g., `IF temp > 200 THEN DENY`). This produces a verdict vector.
+2.  **Structural Denial (Vacuum):** Occurs when no applicable verdict exists. This produces denial through algebraic default.
+
+##### 2.1.7 Physical and Pre-Law Constraints (Out-of-Scope)
+Physical enforcement constraints defined under SIP-008 Level ∞ operate **outside** Verdict Algebra. These constraints may block execution even if Final Verdict is ALLOW. Such enforcement does not produce DENY verdict vectors and is not part of algebraic resolution.
+
+#### 3. The Verdict Vector
 Mathematically, a Verdict `V` is a 4-dimensional vector defined as:
 
 $$V = \langle \delta, \alpha, \sigma, \tau \rangle$$
