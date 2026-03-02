@@ -49,7 +49,23 @@ For "Smart Unit" policies returning complex decisions via the SIP-009 Extended I
 ```
 
 #### Structural Composition
-A valid decision **MUST** contain the following logical fields (represented here in pseudo-Go/JSON syntax):
+ A valid decision **MUST** contain the following logical fields (represented here in pseudo-Go/JSON syntax). 
+ The schema specifically strictly forbids custom verdict strings (e.g., "FORCE_ALLOW") to preserve SIP-010 Algebra compatibility:
+```json
+ {
+   "verdict": "ALLOW | DENY | WARN | HALT", // Must be strict scalar (SIP-010)
+   "authority_level": "Integer",            // 0-4, derived from SIP-008
+   "reason": "String",                      // Context or override justification
+   "input_hash": "String",                  // SHA-256 of telemetry
+   "policy_hash": "String",                 // SHA-256 of active SIP-001 policy
+   "override": {                            // NULL if standard algorithmic decision
+     "justification_code": "String",        // CLASS_S | CLASS_C | CLASS_F (SIP-006)
+     "signer_did": "String",                // DID of the human operator
+     "token": "String",                     // Cryptographic signature payload
+     "liability_hash": "String"             // SHA-256 of proof-of-liability document
+   } 
+ }
+ ```
 
 ```json
 {
@@ -92,7 +108,9 @@ Validity is determined by the presence or absence of the `override` struct (Comp
 * **Validation:**
     1.  The `override.token` MUST carry a valid signature from a registered DID.
     2.  The `override.justification_code` MUST be a valid enumeration from SIP-006.
-    3.  **Note:** In this case, the verdict is forced by the human, effectively preempting the `policy_hash` logic. The `policy_hash` remains in the record for forensic comparison (*"What would the machine have done?"*).
+    3. The `verdict` MUST remain a standard value (e.g., "ALLOW"). The system infers the intervention entirely from the presence of the `override` object.
+    4. The `authority_level` MUST be strictly set to 0 (Emergency) to reflect Execution Preemption.
+    5. **Note:** In this case, the verdict is forced by the human, effectively preempting the policy_hash logic. The policy_hash remains in the record for forensic comparison ("What would the machine have done?").
 
 ## 3. The Liability Shield: Decision ≠ Action
 This section defines the legal liability boundary of the Sopcos Protocol.

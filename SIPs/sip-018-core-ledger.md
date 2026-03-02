@@ -60,6 +60,24 @@ Critical security and responsibility operations are processed as native instruct
 | `0x10` | **OP_LOG_VERDICT** | Anchors routine automated verdict records, maintaining a **Clean State**. |
 | `0x11` | **OP_CONFESSION** | Anchors Human Override events, shifting the system to a **Dirty State**. (Proof of Liability). |
 | `0x12` | **OP_STATE_RESET** | Requires a Level 5 Auditor's signature to clear the Dirty State and restore compliance. |
+ ###### OP_STATE_RESET (0x12) Payload Schema
+ To ensure strict compliance with SIP-006 (Emergency Semantics), SIP-008 (Authority Graph), and SIP-014 (Artifact Vault), the `payload` object for an `OP_STATE_RESET` transaction **MUST** adhere to the following schema:
+ 
+ ```json
+ {
+   "target_did": "String",           // DID of the Node/Asset to be cleared of Dirty State
+   "override_reference": "String",   // SHA-256 hash of the original OP_CONFESSION transaction
+   "auditor_verdict": "String",      // MUST be "JUSTIFIED" or "UNJUSTIFIED" (SIP-006)
+   "reason": "String",               // Human-readable audit justification
+   "audit_ref": "String"             // SIP-014 compliant URN (e.g., urn:sopcos:artifact:sha256:...)
+ }
+
+ ```
+ 
+ **Normative Constraints for OP_STATE_RESET:**
+ 1. **Authority Derivation:** The `public_key` signing this transaction MUST dynamically resolve to a Level 5 (Auditor) authority on the L1 Identity Registry. The payload MUST NOT self-declare the authority level (SIP-008).
+ 2. **Broken Pointer Prevention:** The `audit_ref` MUST NOT be a physical locator (e.g., `s3://` or `https://`). It MUST be a valid Content-Addressable URN to ensure cryptographic longevity (SIP-014).
+ 3. **Causality Binding:** The `override_reference` MUST point to a previously anchored and unresolved `OP_CONFESSION`.
 
 ### C. Industrial Assets - IDAS (0x40 - 0x4F)
 | Hex | Mnemonic | Description |

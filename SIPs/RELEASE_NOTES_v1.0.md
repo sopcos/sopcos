@@ -51,8 +51,7 @@ These elements collectively define:
 - Machines may evaluate and recommend
 - Humans remain **legally and cryptographically accountable**
 
-Overrides are no longer “bypasses” -  
-they are **signed confessions of responsibility**.
+Overrides are no longer “bypasses”, they are **signed confessions of responsibility**.
 
 ---
 

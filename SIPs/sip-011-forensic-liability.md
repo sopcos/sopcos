@@ -57,8 +57,28 @@ Produce an **Override Execution Record**.
 ## 6. Output Schema: The Liability Record
 When an override occurs, the engine **MUST** produce a Verdict where:
 * The `AuthorityLevel` **MUST BE** `0` (Emergency).
-* The `Override` struct contains the signed token.
+*  The Override struct contains the signed token, justification code, and liability hash.
 
+```json
+{
+  "public_key": "<signer_public_key>",
+  "from_account": <account_id>,
+  "type": 17,
+  "anchor_data": {
+    "verdict": "ALLOW",
+    "authority_level": 0,
+    "reason": "<string_justification>",
+    "input_hash": "sha256:<hash>",
+    "policy_hash": "sha256:<hash>",
+    "override": {
+      "justification_code": "<CLASS_S | CLASS_C | CLASS_F>",
+      "signer_did": "did:sop:<identifier>",
+      "token": "<auth_token>",
+      "liability_hash": "sha256:<proof_hash>"
+    }
+  }
+}
+```
 ## 7. Chain Validation Logic (L1)
 ```text
 IF transaction.Override is NOT NULL 
