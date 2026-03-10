@@ -4,7 +4,7 @@
 | :--- | :--- |
 | **SIP** | 020 |
 | **Title** | Standard Industrial Commodities (SIC) |
-| **Status** | DRAFT |
+| **Status** | LIVING STANDARD |
 | **Type** | Standards Track (Core) |
 | **Category** | Core / Asset Management |
 | **Author** | Sopcos Core Developers |
