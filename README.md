@@ -183,6 +183,8 @@ SOPCOS is built as critical infrastructure - not a demo.
 
 ---
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19359701.svg)](https://doi.org/10.5281/zenodo.19359701)
+
 <p align="center">
 <strong>SOPCOS Foundation</strong><br>
 <em>Trust, Executed.</em>
